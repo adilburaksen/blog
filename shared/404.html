@@ -16,8 +16,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/shared/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/shared/favicon/favicon-16x16.png">
     
-    <title>404 - Sayfa Bulunamadı | Adil Burak</title>
-    <meta name="description" content="İstenen sayfa bulunamadı. Ancak endişe etmeyin, güvenlik sistemlerimiz hala sağlam!">
+    <title>404 - Page Not Found | Adil Burak</title>
+    <meta name="description" content="The requested page could not be found. But don't worry, our security systems are still intact!">
     
     <link rel="stylesheet" href="/shared/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -52,19 +52,26 @@
         
         .error-details {
             font-family: monospace;
-            background: var(--bg-secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
             text-align: left;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .error-details p {
+            margin: 0.5rem 0;
+            color: var(--code-color);
         }
         
         .error-actions {
-            margin-top: 2rem;
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
+            margin-top: 2rem;
         }
         
         .error-button {
@@ -74,17 +81,17 @@
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             text-decoration: none;
-            transition: all 0.3s ease;
             font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        .primary-button {
-            background: var(--primary-color);
+        .error-button.primary-button {
+            background-color: var(--primary-color);
             color: white;
         }
         
-        .secondary-button {
-            background: var(--bg-secondary);
+        .error-button.secondary-button {
+            background-color: var(--secondary-bg);
             color: var(--text-color);
         }
         
@@ -98,21 +105,6 @@
             white-space: pre;
             margin: 2rem 0;
             color: var(--primary-color);
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: 6rem;
-            }
-            
-            .error-message {
-                font-size: 1.2rem;
-            }
-            
-            .ascii-art {
-                font-size: 0.7rem;
-            }
         }
     </style>
 </head>
@@ -128,38 +120,44 @@
         </div>
         
         <h1 class="error-code">404</h1>
-        <p class="error-message">Erişim Reddedildi: Hedef Kaynak Bulunamadı</p>
+        <p class="error-message">Access Denied: Target Resource Not Found</p>
         
         <div class="error-details">
-            <p>> Güvenlik taraması başlatılıyor...</p>
-            <p>> Erişim günlükleri kontrol ediliyor...</p>
-            <p>> Hata: İstenen sayfa güvenli ortamımızda bulunamadı.</p>
-            <p>> Öneri: Bilinen güvenli bir konuma dönün.</p>
+            <p>> Initiating security scan...</p>
+            <p>> Checking access logs...</p>
+            <p>> Error: The requested page does not exist in our secure environment.</p>
+            <p>> Recommendation: Return to a known safe location.</p>
         </div>
         
         <div class="error-actions">
             <a href="/" class="error-button primary-button">
                 <i class="fas fa-home"></i>
-                Ana Sayfaya Dön
+                Return to Home
             </a>
             <a href="/blog" class="error-button secondary-button">
                 <i class="fas fa-book"></i>
-                Blog Yazılarını Gör
+                View Blog Posts
             </a>
             <a href="/about" class="error-button secondary-button">
                 <i class="fas fa-user-shield"></i>
-                Hakkımda
+                About Me
             </a>
         </div>
     </div>
-
+    
     <script>
-        // Check if dark mode is enabled
+        // Function to update theme based on system preference
         function updateTheme() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
         }
-
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+        
         // Initial theme check
         updateTheme();
     </script>
