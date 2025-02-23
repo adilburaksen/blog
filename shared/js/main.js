@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Theme Management
     const savedTheme = localStorage.getItem('theme');
-    if (!savedTheme) {
-        htmlElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        htmlElement.setAttribute('data-theme', savedTheme);
-    }
-    updateThemeIcon(themeIcon, htmlElement.getAttribute('data-theme'));
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const defaultTheme = prefersDark ? 'dark' : 'light';
+    
+    const theme = savedTheme || defaultTheme;
+    htmlElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    updateThemeIcon(themeIcon, theme);
 
     // Toggle theme on button click
     themeToggle.addEventListener('click', () => {
