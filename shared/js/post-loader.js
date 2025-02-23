@@ -4,7 +4,7 @@ class PostLoader {
         this.prevPostLink = document.querySelector('.prev-post');
         this.nextPostLink = document.querySelector('.next-post');
         
-        // URL'den slug'ı al - artık /blog/ yolundan geliyor
+        // Get slug from URL - now comes from /blog/ path
         const pathParts = window.location.pathname.split('/');
         this.currentSlug = pathParts[pathParts.length - 1];
         this.currentPost = null;
@@ -33,7 +33,7 @@ class PostLoader {
             const data = await response.json();
             this.allPosts = data.posts;
             
-            // Page 2 varsa onu da yükle
+            // Try loading page 2 if exists
             try {
                 const response2 = await fetch('/blog-content/posts/page-2.json');
                 if (response2.ok) {
@@ -41,7 +41,7 @@ class PostLoader {
                     this.allPosts = [...this.allPosts, ...data2.posts];
                 }
             } catch (error) {
-                // Page 2 yoksa sorun değil
+                // It's okay if page 2 doesn't exist
             }
 
             // Sort posts by date
@@ -69,23 +69,23 @@ class PostLoader {
             }
             const content = await response.text();
             
-            // Markdown içeriğini HTML'e çevir
+            // Convert markdown to HTML
             const html = marked.parse(content);
             
-            // Post başlığı ve içeriği
+            // Post title and content
             this.postContent.innerHTML = `
                 <h1>${this.currentPost.title}</h1>
                 <div class="post-meta">
-                    <time datetime="${this.currentPost.date}">${new Date(this.currentPost.date).toLocaleDateString('tr-TR')}</time>
+                    <time datetime="${this.currentPost.date}">${new Date(this.currentPost.date).toLocaleDateString('en-US')}</time>
                     ${this.currentPost.tags ? `<div class="tags">${this.currentPost.tags.map(tag => `<a href="/tags/${tag}">#${tag}</a>`).join(' ')}</div>` : ''}
                 </div>
                 <div class="post-body">${html}</div>
             `;
             
-            // Sayfa başlığını güncelle
+            // Update page title
             document.title = `${this.currentPost.title} | Adil Burak`;
             
-            // Meta description güncelle
+            // Update meta description
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) {
                 metaDesc.setAttribute('content', this.currentPost.description || '');
@@ -114,8 +114,8 @@ class PostLoader {
     showError() {
         this.postContent.innerHTML = `
             <div class="error">
-                <h1>Yazı Bulunamadı</h1>
-                <p>Aradığınız yazıya ulaşılamadı. Lütfen <a href="/blog">blog ana sayfasına</a> dönün.</p>
+                <h1>Post Not Found</h1>
+                <p>The post you're looking for could not be found. Please return to the <a href="/blog">blog home page</a>.</p>
             </div>
         `;
     }
