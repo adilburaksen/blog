@@ -584,15 +584,36 @@ header {
     width: 3rem;
     height: 3rem;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--border-color);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    z-index: 0;
 }
 
 .social-link i {
     font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.social-link:hover::before {
+    transform: scale(1);
 }
 
 .social-link:hover {
     color: var(--primary-color);
-    background: var(--border-color);
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
