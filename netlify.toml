@@ -13,8 +13,18 @@ command = ""  # No build command needed for static files
   status = 200
 
 [[redirects]]
+  from = "/about"
+  to = "/blog-content/about.html"
+  status = 200
+
+[[redirects]]
   from = "https://blog.hackwith.me"
   to = "/blog-content/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "https://blog.hackwith.me/about"
+  to = "/blog-content/about.html"
   status = 200
 
 [[redirects]]
