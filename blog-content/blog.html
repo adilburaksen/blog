@@ -56,6 +56,32 @@
         </footer>
     </div>
 
+    <script>
+        function displayPosts(page) {
+            const postsContainer = document.getElementById('posts');
+            if (!postsContainer) return;
+
+            const start = (page - 1) * postsPerPage;
+            const end = start + postsPerPage;
+            const postsToShow = blogPosts.slice(start, end);
+
+            postsContainer.innerHTML = postsToShow.map(post => `
+                <article class="post-card">
+                    <h2 class="post-title">
+                        <a href="/?slug=${post.slug}">${post.title}</a>
+                    </h2>
+                    <div class="post-meta">
+                        ${post.date} · ${post.readTime} min read
+                    </div>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <div class="post-tags">
+                        ${post.tags.map(tag => `<a href="/tags#${tag}" class="tag">${tag}</a>`).join('')}
+                    </div>
+                </article>
+            `).join('');
+        }
+    </script>
+
     <script src="/shared/js/main.js"></script>
     <script src="/shared/js/posts.js"></script>
 </body>
