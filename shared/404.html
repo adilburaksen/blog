@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/shared/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/shared/favicon/favicon-16x16.png">
     
-    <title>404 - Page Not Found | Adil Burak</title>
+    <title>404 - Page Not Found | Adil Burak Şen</title>
     <meta name="description" content="The requested page could not be found. But don't worry, our security systems are still intact!">
     
     <link rel="stylesheet" href="/shared/css/style.css">
@@ -52,26 +52,19 @@
         
         .error-details {
             font-family: monospace;
-            text-align: left;
-            margin: 2rem 0;
+            background: var(--bg-secondary);
             padding: 1rem;
-            background-color: var(--code-bg);
             border-radius: 8px;
-            max-width: 600px;
-            width: 100%;
-        }
-        
-        .error-details p {
-            margin: 0.5rem 0;
-            color: var(--code-color);
+            margin: 1rem 0;
+            text-align: left;
         }
         
         .error-actions {
+            margin-top: 2rem;
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 2rem;
         }
         
         .error-button {
@@ -81,17 +74,17 @@
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             text-decoration: none;
-            font-weight: 500;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
         
-        .error-button.primary-button {
-            background-color: var(--primary-color);
+        .primary-button {
+            background: var(--primary-color);
             color: white;
         }
         
-        .error-button.secondary-button {
-            background-color: var(--secondary-bg);
+        .secondary-button {
+            background: var(--bg-secondary);
             color: var(--text-color);
         }
         
@@ -105,6 +98,21 @@
             white-space: pre;
             margin: 2rem 0;
             color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-message {
+                font-size: 1.2rem;
+            }
+            
+            .ascii-art {
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -132,7 +140,7 @@
         <div class="error-actions">
             <a href="/" class="error-button primary-button">
                 <i class="fas fa-home"></i>
-                Return to Home
+                Return to Base
             </a>
             <a href="/blog" class="error-button secondary-button">
                 <i class="fas fa-book"></i>
@@ -144,20 +152,14 @@
             </a>
         </div>
     </div>
-    
+
     <script>
-        // Function to update theme based on system preference
+        // Check if dark mode is enabled
         function updateTheme() {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
         }
-        
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
-        
+
         // Initial theme check
         updateTheme();
     </script>
