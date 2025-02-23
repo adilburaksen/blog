@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "slug": "modern-web-development-with-progressive-enhancement",
+      "title": "Modern Web Development with Progressive Enhancement",
+      "date": "2025-02-24T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "Progressive enhancement is a strategy for web design that emphasizes core webpage content first, then progressively adds more nuanced and technically rigorous layers of presentation and features on top of the content as the end-user's browser/internet connection allow.",
+      "tags": ["web development", "progressive enhancement", "frontend"],
+      "readingTime": "5 min"
+    },
+    {
+      "id": "2",
+      "slug": "future-of-javascript-development",
+      "title": "The Future of JavaScript Development",
+      "date": "2025-02-23T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "As we look ahead to the future of JavaScript development, several exciting trends are emerging. From WebAssembly integration to enhanced type safety with TypeScript, the JavaScript ecosystem continues to evolve and improve.",
+      "tags": ["javascript", "webassembly", "typescript"],
+      "readingTime": "7 min"
+    },
+    {
+      "id": "3",
+      "slug": "building-fast-reliable-web-applications",
+      "title": "Building Fast and Reliable Web Applications",
+      "date": "2025-02-22T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "Performance is crucial for modern web applications. In this post, we'll explore various techniques and best practices for building fast, reliable, and scalable web applications that provide excellent user experience.",
+      "tags": ["performance", "web apps", "optimization"],
+      "readingTime": "6 min"
+    },
+    {
+      "id": "4",
+      "slug": "mastering-css-grid-layout",
+      "title": "Mastering CSS Grid Layout",
+      "date": "2025-02-21T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "CSS Grid Layout is a powerful tool for creating complex web layouts. Learn how to use CSS Grid effectively and create responsive designs that work across all devices.",
+      "tags": ["css", "web design", "responsive"],
+      "readingTime": "4 min"
+    },
+    {
+      "id": "5",
+      "slug": "introduction-to-service-workers",
+      "title": "Introduction to Service Workers",
+      "date": "2025-02-20T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "Service Workers are scripts that run in the background, separate from a web page. They enable features like offline functionality, background syncs, and push notifications. Let's dive into how they work.",
+      "tags": ["pwa", "service workers", "web"],
+      "readingTime": "8 min"
+    }
+  ]
+}

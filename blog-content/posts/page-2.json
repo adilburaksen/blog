@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "id": "6",
+      "slug": "understanding-web-security-best-practices",
+      "title": "Understanding Web Security Best Practices",
+      "date": "2025-02-19T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "Web security is crucial in today's digital landscape. Learn about common security vulnerabilities and how to protect your web applications from various types of attacks.",
+      "tags": ["security", "web development", "best practices"],
+      "readingTime": "9 min"
+    },
+    {
+      "id": "7",
+      "slug": "effective-state-management-in-modern-web-apps",
+      "title": "Effective State Management in Modern Web Apps",
+      "date": "2025-02-18T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "State management is a critical aspect of modern web applications. Explore different state management solutions and learn when to use each approach.",
+      "tags": ["state management", "web apps", "architecture"],
+      "readingTime": "7 min"
+    },
+    {
+      "id": "8",
+      "slug": "optimizing-web-performance",
+      "title": "Optimizing Web Performance",
+      "date": "2025-02-17T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "Web performance optimization is key to providing a great user experience. Discover techniques for improving loading times, reducing bundle sizes, and optimizing assets.",
+      "tags": ["performance", "optimization", "web"],
+      "readingTime": "6 min"
+    },
+    {
+      "id": "9",
+      "slug": "modern-css-features-you-should-know",
+      "title": "Modern CSS Features You Should Know",
+      "date": "2025-02-16T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "CSS has evolved significantly in recent years. Learn about modern CSS features like Custom Properties, CSS Grid, and new selectors that make styling more powerful and flexible.",
+      "tags": ["css", "frontend", "web design"],
+      "readingTime": "5 min"
+    },
+    {
+      "id": "10",
+      "slug": "building-accessible-web-applications",
+      "title": "Building Accessible Web Applications",
+      "date": "2025-02-15T00:00:00Z",
+      "author": "Adil Burak",
+      "excerpt": "Web accessibility is not just a nice-to-have feature anymore. Learn how to make your web applications accessible to everyone, including users with disabilities.",
+      "tags": ["accessibility", "web development", "a11y"],
+      "readingTime": "8 min"
+    }
+  ]
+}
