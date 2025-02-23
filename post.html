@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post · 部落格</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="post-page">
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="site-title">
+                    <a href="index.html">Post<br>文章</a>
+                </h1>
+                <div class="nav-section">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="nav-links">
+                        <div class="main-nav">
+                            <a href="index.html">Home</a>
+                            <a href="blog.html">Blog</a>
+                            <a href="tags.html">Tags</a>
+                        </div>
+                        <div class="about-nav">
+                            <a href="about.html">About</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <article class="blog-post">
+                <!-- Post content will be injected here -->
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Blog. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/posts.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Get post slug from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+        
+        // Find the post
+        const post = blogPosts.find(p => p.slug === slug);
+        
+        if (post) {
+            // Update page title
+            document.title = `${post.title} · 部落格`;
+            
+            // Display post content
+            const postElement = document.querySelector('.blog-post');
+            postElement.innerHTML = `
+                <h1 class="post-title">${post.title}</h1>
+                <div class="post-meta">
+                    ${post.date} · ${post.readTime} min read
+                </div>
+                <div class="post-content">
+                    ${post.content}
+                </div>
+                <div class="post-tags">
+                    ${post.tags.map(tag => `<a href="tags.html#${tag}" class="tag">${tag}</a>`).join('')}
+                </div>
+            `;
+        } else {
+            // Handle 404
+            const postElement = document.querySelector('.blog-post');
+            postElement.innerHTML = `
+                <h1>Post Not Found</h1>
+                <p>Sorry, the post you're looking for doesn't exist.</p>
+                <p><a href="index.html">← Back to Home</a></p>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    
+    <title>404 - Page Not Found | Adil Burak Şen</title>
+    <meta name="description" content="The requested page could not be found. But don't worry, our security systems are still intact!">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            margin: 0;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: monospace;
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            max-width: 600px;
+        }
+        
+        .error-details {
+            font-family: monospace;
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        
+        .error-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .error-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .primary-button {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .secondary-button {
+            background: var(--bg-secondary);
+            color: var(--text-color);
+        }
+        
+        .error-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            margin: 2rem 0;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-message {
+                font-size: 1.2rem;
+            }
+            
+            .ascii-art {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-page">
+        <div class="ascii-art">
+  _____   ___  ____    
+ |  __ \ / _ \|  _ \   
+ | |  | | | | | |_) |  
+ | |  | | | | |  _ <   
+ | |__| | |_| | |_) |  
+ |_____/ \___/|____/   
+        </div>
+        
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Access Denied: Target Resource Not Found</p>
+        
+        <div class="error-details">
+            <p>> Initiating security scan...</p>
+            <p>> Checking access logs...</p>
+            <p>> Error: The requested page does not exist in our secure environment.</p>
+            <p>> Recommendation: Return to a known safe location.</p>
+        </div>
+        
+        <div class="error-actions">
+            <a href="/" class="error-button primary-button">
+                <i class="fas fa-home"></i>
+                Return to Base
+            </a>
+            <a href="/blog" class="error-button secondary-button">
+                <i class="fas fa-book"></i>
+                View Blog Posts
+            </a>
+            <a href="/about" class="error-button secondary-button">
+                <i class="fas fa-user-shield"></i>
+                About Me
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Check if dark mode is enabled
+        function updateTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+
+        // Initial theme check
+        updateTheme();
+    </script>
+</body>
+</html>

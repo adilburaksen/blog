@@ -1,0 +1,28 @@
+[build]
+publish = "/"
+
+[[redirects]]
+  from = "https://hackwith.me/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://hackwith.me/*"
+  to = "https://hackwith.me/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app *.hackwith.me;
