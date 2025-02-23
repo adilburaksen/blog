@@ -575,11 +575,15 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 0.3rem;
-    padding: 0.5rem;
+    padding: 1rem;
     text-decoration: none;
     color: var(--text-color);
-    transition: all 0.2s ease;
-    border-radius: 4px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    background: var(--secondary-bg);
+    width: 3rem;
+    height: 3rem;
+    justify-content: center;
 }
 
 .social-link i {
@@ -588,7 +592,9 @@ header {
 
 .social-link:hover {
     color: var(--primary-color);
-    background: var(--secondary-bg);
+    background: var(--border-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer */
