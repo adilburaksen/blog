@@ -3,16 +3,24 @@ publish = "./"
 command = ""  # No build command needed for static files
 
 [[redirects]]
-  from = "https://hackwith.me/*"
-  to = "/main/:splat"
-  status = 301
-  force = true
+  from = "/"
+  to = "/main/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog-content/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "https://blog.hackwith.me"
+  to = "/blog-content/blog.html"
+  status = 200
 
 [[redirects]]
   from = "https://blog.hackwith.me/*"
   to = "/blog-content/:splat"
-  status = 301
-  force = true
+  status = 200
 
 [[redirects]]
   from = "http://hackwith.me/*"
