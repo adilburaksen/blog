@@ -33,6 +33,12 @@ command = ""  # No build command needed for static files
   status = 200
 
 [[redirects]]
+  from = "/blog/*"
+  to = "/post.html?slug=:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "http://hackwith.me/*"
   to = "https://hackwith.me/:splat"
   status = 301
