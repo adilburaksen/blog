@@ -1,20 +1,5 @@
 :root {
-    /* Light theme as default */
-    --bg-color: #ffffff;
-    --text-color: #1a1a1a;
-    --primary-color: #2563eb;
-    --secondary-color: #6b7280;
-    --border-color: #e2e8f0;
-    --secondary-bg: #f8fafc;
-    --accent-color: #6d28d9;
-    --tag-bg: #f8fafc;
-    --tag-hover: #e2e8f0;
-    --header-bg: rgba(255, 255, 255, 0.95);
-    --card-bg: #ffffff;
-    --hover-bg: #f8fafc;
-}
-
-[data-theme="dark"] {
+    /* Dark theme as default */
     --bg-color: #0a0a0a;
     --text-color: #e5e5e5;
     --primary-color: #3b82f6;
@@ -27,6 +12,21 @@
     --header-bg: rgba(10, 10, 10, 0.95);
     --card-bg: #18181b;
     --hover-bg: #27272a;
+}
+
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+    --primary-color: #2563eb;
+    --secondary-color: #6b7280;
+    --border-color: #e2e8f0;
+    --secondary-bg: #f8fafc;
+    --accent-color: #6d28d9;
+    --tag-bg: #f8fafc;
+    --tag-hover: #e2e8f0;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --card-bg: #ffffff;
+    --hover-bg: #f8fafc;
 }
 
 * {
@@ -956,7 +956,6 @@ footer {
     text-decoration: none;
     color: var(--text-color);
     transition: all 0.2s ease;
-    border-radius: 4px;
 }
 
 .social-link i {
