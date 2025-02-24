@@ -4,9 +4,10 @@ class PostLoader {
         this.prevPostLink = document.querySelector('.prev-post');
         this.nextPostLink = document.querySelector('.next-post');
         
-        // Get slug from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        this.currentSlug = urlParams.get('slug');
+        // Get slug from URL path
+        const pathParts = window.location.pathname.split('/');
+        this.currentSlug = pathParts[pathParts.length - 1];
+        
         this.currentPost = null;
         this.allPosts = [];
         
@@ -26,7 +27,7 @@ class PostLoader {
 
     async loadAllPosts() {
         try {
-            const response = await fetch('/blog-content/posts.json');
+            const response = await fetch('/blog-content/posts/posts.json');
             if (!response.ok) {
                 throw new Error('Failed to load posts');
             }
@@ -44,10 +45,6 @@ class PostLoader {
         if (!this.currentSlug) {
             throw new Error('No post slug specified');
         }
-
-        const currentPath = window.location.pathname;
-        const slugFromPath = currentPath.split('/posts/')[1];
-        this.currentSlug = slugFromPath || this.currentSlug;
 
         this.currentPost = this.allPosts.find(post => post.slug === this.currentSlug);
         
@@ -69,19 +66,24 @@ class PostLoader {
             this.postContent.innerHTML = `
                 <h1>${this.currentPost.title}</h1>
                 <div class="post-meta">
-                    <time datetime="${this.currentPost.date}">${new Date(this.currentPost.date).toLocaleDateString('en-US')}</time>
+                    <time datetime="${this.currentPost.date}">${new Date(this.currentPost.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })}</time>
+                    · ${this.currentPost.readingTime} min read
                     ${this.currentPost.tags ? `<div class="tags">${this.currentPost.tags.map(tag => `<a href="/tags/${tag}">#${tag}</a>`).join(' ')}</div>` : ''}
                 </div>
                 <div class="post-body">${html}</div>
             `;
             
             // Update page title
-            document.title = `${this.currentPost.title} | Adil Burak`;
+            document.title = `${this.currentPost.title} | Blog`;
             
             // Update meta description
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) {
-                metaDesc.setAttribute('content', this.currentPost.description || '');
+                metaDesc.setAttribute('content', this.currentPost.excerpt || '');
             }
         } catch (error) {
             throw new Error('Failed to load post content');
@@ -105,12 +107,14 @@ class PostLoader {
     }
 
     showError() {
-        this.postContent.innerHTML = `
-            <div class="error">
-                <h1>Post Not Found</h1>
-                <p>The post you're looking for could not be found. Please return to the <a href="/blog">blog home page</a>.</p>
-            </div>
-        `;
+        if (this.postContent) {
+            this.postContent.innerHTML = `
+                <div class="error-message">
+                    <h1>Post Not Found</h1>
+                    <p>The post you're looking for could not be found. Please return to the <a href="/blog">blog home page</a>.</p>
+                </div>
+            `;
+        }
     }
 }
 
