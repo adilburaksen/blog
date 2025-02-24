@@ -1,12 +1,19 @@
 class BlogLoader {
     constructor() {
-        this.blogContainer = document.getElementById('posts');
+        this.blogContainer = document.getElementById('posts-grid');
         this.loadingIndicator = document.createElement('div');
         this.loadingIndicator.className = 'loading-indicator';
         this.loadingIndicator.textContent = 'Loading...';
         
         this.posts = [];
         this.filteredPosts = [];
+        
+        if (this.blogContainer) {
+            this.blogContainer.appendChild(this.loadingIndicator);
+        } else {
+            console.error('Blog container not found!');
+            return;
+        }
         
         this.setupSearch();
         this.setupBackToTop();
@@ -48,76 +55,78 @@ class BlogLoader {
         });
     }
 
-    filterPosts(searchTerm) {
-        searchTerm = searchTerm.toLowerCase();
-        this.filteredPosts = this.posts.filter(post => {
-            return post.title.toLowerCase().includes(searchTerm) ||
-                   post.excerpt.toLowerCase().includes(searchTerm) ||
-                   post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
-        });
-        this.displayPosts();
-    }
-
     async loadPosts() {
         try {
-            this.blogContainer.appendChild(this.loadingIndicator);
-            
-            const currentYear = new Date().getFullYear();
-            const response = await fetch(`/blog-content/posts/${currentYear}/posts.json`);
-            
+            const response = await fetch('/blog-content/posts/index.json');
             if (!response.ok) {
-                throw new Error(`Failed to load posts: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
-            const data = await response.json();
-            this.posts = data.posts;
-            this.filteredPosts = [...this.posts];
-            
-            this.displayPosts();
+            const posts = await response.json();
+            this.posts = posts;
+            this.filteredPosts = posts;
+            this.renderPosts();
         } catch (error) {
             console.error('Error loading posts:', error);
-            this.blogContainer.innerHTML = `
-                <div class="error-message">
-                    <h2>Failed to load blog posts</h2>
-                    <p>Please try again later. If the problem persists, contact the site administrator.</p>
-                </div>
-            `;
-        } finally {
-            this.loadingIndicator.remove();
+            this.loadingIndicator.textContent = 'Error loading posts. Please try again later.';
         }
     }
 
-    displayPosts() {
+    renderPosts() {
         if (!this.blogContainer) return;
+        
+        this.blogContainer.removeChild(this.loadingIndicator);
+        this.blogContainer.innerHTML = '';
 
-        const postsToShow = this.filteredPosts;
+        if (this.filteredPosts.length === 0) {
+            const noResults = document.createElement('div');
+            noResults.className = 'no-results';
+            noResults.textContent = 'No posts found.';
+            this.blogContainer.appendChild(noResults);
+            return;
+        }
 
-        this.blogContainer.innerHTML = postsToShow.map(post => {
-            const date = new Date(post.date).toLocaleDateString('en-US', {
+        this.filteredPosts.forEach(post => {
+            const postCard = document.createElement('article');
+            postCard.className = 'post-card';
+            
+            const date = new Date(post.date);
+            const formattedDate = date.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
 
-            return `
-                <article class="post-card">
-                    <h2 class="post-title">
-                        <a href="/posts/${post.slug}">${post.title}</a>
-                    </h2>
-                    <div class="post-meta">
-                        ${date} · ${post.readingTime} min read
-                    </div>
-                    <p class="post-excerpt">${post.excerpt}</p>
-                    <div class="post-tags">
-                        ${post.tags.map(tag => `<a href="/tags#${tag}" class="tag">${tag}</a>`).join('')}
-                    </div>
-                </article>
+            postCard.innerHTML = `
+                <h2 class="post-title">
+                    <a href="${post.url}">${post.title}</a>
+                </h2>
+                <div class="post-meta">
+                    <span class="post-date">${formattedDate}</span>
+                    ${post.tags ? `<span class="post-tags">${post.tags.map(tag => `#${tag}`).join(' ')}</span>` : ''}
+                </div>
+                ${post.excerpt ? `<p class="post-excerpt">${post.excerpt}</p>` : ''}
             `;
-        }).join('');
+            
+            this.blogContainer.appendChild(postCard);
+        });
     }
-}
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    new BlogLoader();
-});
+    filterPosts(searchTerm) {
+        searchTerm = searchTerm.toLowerCase().trim();
+        
+        this.filteredPosts = this.posts.filter(post => {
+            const titleMatch = post.title.toLowerCase().includes(searchTerm);
+            const tagsMatch = post.tags ? post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) : false;
+            const excerptMatch = post.excerpt ? post.excerpt.toLowerCase().includes(searchTerm) : false;
+            
+            return titleMatch || tagsMatch || excerptMatch;
+        });
+        
+        this.renderPosts();
+    }
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        new BlogLoader();
+    });
+}
