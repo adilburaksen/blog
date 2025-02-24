@@ -97,12 +97,14 @@ class PostLoader {
             const prevPost = this.allPosts[currentIndex - 1];
             this.prevPostLink.href = `/posts/${prevPost.slug}`;
             this.prevPostLink.style.display = 'inline-block';
+            this.prevPostLink.innerHTML = `← ${prevPost.title}`;
         }
         
         if (currentIndex < this.allPosts.length - 1) {
             const nextPost = this.allPosts[currentIndex + 1];
             this.nextPostLink.href = `/posts/${nextPost.slug}`;
             this.nextPostLink.style.display = 'inline-block';
+            this.nextPostLink.innerHTML = `${nextPost.title} →`;
         }
     }
 

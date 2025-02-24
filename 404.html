@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    
+    <link rel="stylesheet" href="/shared/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .error-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+        }
+        
+        .error-details {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .error-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        
+        .error-details li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .error-details li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .action-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            color: var(--text-color);
+        }
+        
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .action-button i {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="site-title">
+                    <a href="/">Adil Burak Şen</a>
+                </h1>
+                <div class="nav-section">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="nav-links">
+                        <div class="main-nav">
+                            <a href="/">Home</a>
+                            <a href="/blog">Blog</a>
+                        </div>
+                        <div class="about-nav">
+                            <a href="/about">About</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="error-container">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Access Denied: Target Resource Not Found</h1>
+                
+                <div class="error-details">
+                    <ul>
+                        <li>Initiating security scan...</li>
+                        <li>Checking Access logs...</li>
+                        <li>Error: The requested page does not exist in our secure environment.</li>
+                        <li>Recommendation: Return to a known safe location.</li>
+                    </ul>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="/" class="action-button">
+                        <i class="fas fa-home"></i>
+                        Return to Base
+                    </a>
+                    <a href="/blog" class="action-button">
+                        <i class="fas fa-book"></i>
+                        View Blog Posts
+                    </a>
+                    <a href="/about" class="action-button">
+                        <i class="fas fa-user"></i>
+                        About Me
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Adil Burak Şen. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="/shared/js/theme.js"></script>
+</body>
+</html>
