@@ -63,19 +63,30 @@ class PostLoader {
             // Convert markdown to HTML
             const html = marked.parse(content);
             
-            // Post title and content
+            // Format date
+            const date = new Date(this.currentPost.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Post metadata and content
             this.postContent.innerHTML = `
-                <h1>${this.currentPost.title}</h1>
-                <div class="post-meta">
-                    <time datetime="${this.currentPost.date}">${new Date(this.currentPost.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    })}</time>
-                    · ${this.currentPost.readingTime} min read
-                    ${this.currentPost.tags ? `<div class="tags">${this.currentPost.tags.map(tag => `<a href="/tags/${tag}">#${tag}</a>`).join(' ')}</div>` : ''}
+                <div class="post-header">
+                    <h1>${this.currentPost.title}</h1>
+                    <div class="post-meta">
+                        <time datetime="${this.currentPost.date}">${date}</time>
+                        · ${this.currentPost.readingTime} min read
+                    </div>
+                    ${this.currentPost.tags ? `
+                        <div class="post-tags">
+                            ${this.currentPost.tags.map(tag => `<a href="/tags/${tag}" class="tag">#${tag}</a>`).join(' ')}
+                        </div>
+                    ` : ''}
                 </div>
-                <div class="post-body">${html}</div>
+                <div class="post-body">
+                    ${html}
+                </div>
             `;
             
             // Update page title
