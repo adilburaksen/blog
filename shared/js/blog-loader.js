@@ -20,44 +20,9 @@ class BlogLoader {
         this.loadPosts();
     }
 
-    setupSearch() {
-        const searchInput = document.getElementById('searchInput');
-        if (!searchInput) return;
-
-        let debounceTimeout;
-        searchInput.addEventListener('input', () => {
-            clearTimeout(debounceTimeout);
-            debounceTimeout = setTimeout(() => {
-                this.filterPosts(searchInput.value);
-            }, 300);
-        });
-    }
-
-    setupBackToTop() {
-        const backToTop = document.createElement('button');
-        backToTop.className = 'back-to-top';
-        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-        document.body.appendChild(backToTop);
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-
     async loadPosts() {
         try {
-            const response = await fetch('/blog/blog-content/posts/index.json');
+            const response = await fetch('/blog-content/posts/index.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -96,12 +61,9 @@ class BlogLoader {
                 day: 'numeric'
             });
 
-            // Ensure URLs start with /blog/
-            const postUrl = post.url.startsWith('/blog/') ? post.url : '/blog' + post.url;
-
             postCard.innerHTML = `
                 <h2 class="post-title">
-                    <a href="${postUrl}">${post.title}</a>
+                    <a href="${post.url}">${post.title}</a>
                 </h2>
                 <div class="post-meta">
                     <span class="post-date">${formattedDate}</span>
@@ -128,8 +90,43 @@ class BlogLoader {
         this.renderPosts();
     }
 
-    // Initialize when DOM is ready
-    document.addEventListener('DOMContentLoaded', () => {
-        new BlogLoader();
-    });
+    setupSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (!searchInput) return;
+
+        let debounceTimeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                this.filterPosts(searchInput.value);
+            }, 300);
+        });
+    }
+
+    setupBackToTop() {
+        const backToTop = document.createElement('button');
+        backToTop.className = 'back-to-top';
+        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        document.body.appendChild(backToTop);
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 }
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new BlogLoader();
+});

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog · 博客</title>
+    <title>Welcome to My Blog</title>
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/shared/favicon/favicon.ico">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/shared/css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body class="blog-page">
+<body class="post-page">
     <div class="container">
         <header>
             <div class="header-content">
@@ -33,14 +33,32 @@
         </header>
 
         <main>
-            <section class="blog-section">
-                <div class="search-section">
-                    <input type="text" id="searchInput" placeholder="Search blog posts..." class="search-input">
+            <article class="post-content">
+                <header class="post-header">
+                    <h1>Welcome to My Blog</h1>
+                    <div class="post-meta">
+                        <time datetime="2025-02-24">February 24, 2025</time>
+                        <span class="post-tags">
+                            <a href="/blog-content/tags.html#welcome">#welcome</a>
+                            <a href="/blog-content/tags.html#introduction">#introduction</a>
+                        </span>
+                    </div>
+                </header>
+
+                <div class="post-body">
+                    <p>Welcome to my personal blog! This space is where I'll be sharing my thoughts, experiences, and insights about cybersecurity, ethical hacking, and technology in general.</p>
+                    
+                    <p>Stay tuned for upcoming posts about:</p>
+                    <ul>
+                        <li>Cybersecurity best practices</li>
+                        <li>Ethical hacking techniques</li>
+                        <li>Security research findings</li>
+                        <li>Technology trends and reviews</li>
+                    </ul>
+
+                    <p>Feel free to explore the blog and don't hesitate to reach out if you have any questions or suggestions!</p>
                 </div>
-                <div id="posts-grid" class="posts-grid">
-                    <!-- Posts will be loaded here -->
-                </div>
-            </section>
+            </article>
         </main>
 
         <footer>
@@ -50,6 +68,5 @@
 
     <!-- Scripts -->
     <script src="/shared/js/main.js"></script>
-    <script src="/shared/js/blog-loader.js"></script>
 </body>
 </html>

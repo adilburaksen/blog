@@ -3,7 +3,7 @@
         {
             "title": "Welcome to My Blog",
             "date": "2025-02-24",
-            "url": "/blog/blog-content/posts/2025/welcome.html",
+            "url": "/blog-content/posts/2025/welcome.html",
             "excerpt": "Welcome to my personal blog where I'll be sharing my thoughts and experiences.",
             "tags": ["welcome", "introduction"]
         }
