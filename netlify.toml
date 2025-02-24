@@ -3,6 +3,11 @@ publish = "/"
 command = ""  # No build command needed for static files
 
 [[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/blog"
   to = "/blog-content/blog.html"
   status = 200
@@ -10,6 +15,11 @@ command = ""  # No build command needed for static files
 [[redirects]]
   from = "/posts/*"
   to = "/blog-content/post.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
   status = 200
 
 [[redirects]]
