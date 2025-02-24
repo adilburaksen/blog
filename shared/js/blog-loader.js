@@ -4,17 +4,20 @@ class BlogLoader {
         this.loadingIndicator = document.createElement('div');
         this.loadingIndicator.className = 'loading-indicator';
         this.loadingIndicator.textContent = 'Loading...';
-        
+
+        // Determine if we're accessing through /blog or directly
+        this.basePath = window.location.pathname.startsWith('/blog') ? '/blog' : '';
+
         this.posts = [];
         this.filteredPosts = [];
-        
+
         if (this.blogContainer) {
             this.blogContainer.appendChild(this.loadingIndicator);
         } else {
             console.error('Blog container not found!');
             return;
         }
-        
+
         this.setupSearch();
         this.setupBackToTop();
         this.loadPosts();
@@ -22,12 +25,15 @@ class BlogLoader {
 
     async loadPosts() {
         try {
-            const response = await fetch('/blog-content/posts/index.json');
+            const response = await fetch(this.basePath + '/blog-content/posts/index.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            this.posts = data.posts;
+            this.posts = data.posts.map(post => ({
+                ...post,
+                url: this.basePath + post.url // Add basePath to URLs
+            }));
             this.filteredPosts = this.posts;
             this.renderPosts();
         } catch (error) {
@@ -38,7 +44,7 @@ class BlogLoader {
 
     renderPosts() {
         if (!this.blogContainer) return;
-        
+
         this.blogContainer.removeChild(this.loadingIndicator);
         this.blogContainer.innerHTML = '';
 
@@ -53,7 +59,7 @@ class BlogLoader {
         this.filteredPosts.forEach(post => {
             const postCard = document.createElement('article');
             postCard.className = 'post-card';
-            
+
             const date = new Date(post.date);
             const formattedDate = date.toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -71,22 +77,22 @@ class BlogLoader {
                 </div>
                 ${post.excerpt ? `<p class="post-excerpt">${post.excerpt}</p>` : ''}
             `;
-            
+
             this.blogContainer.appendChild(postCard);
         });
     }
 
     filterPosts(searchTerm) {
         searchTerm = searchTerm.toLowerCase().trim();
-        
+
         this.filteredPosts = this.posts.filter(post => {
             const titleMatch = post.title.toLowerCase().includes(searchTerm);
             const tagsMatch = post.tags ? post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) : false;
             const excerptMatch = post.excerpt ? post.excerpt.toLowerCase().includes(searchTerm) : false;
-            
+
             return titleMatch || tagsMatch || excerptMatch;
         });
-        
+
         this.renderPosts();
     }
 

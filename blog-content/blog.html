@@ -13,21 +13,31 @@
     <link rel="stylesheet" href="/shared/css/style.css">
     <link rel="stylesheet" href="/shared/css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        // Determine if we're accessing through /blog or directly
+        const basePath = window.location.pathname.startsWith('/blog') ? '/blog' : '';
+        
+        // Update base tag dynamically
+        const base = document.createElement('base');
+        base.href = basePath + '/';
+        document.head.appendChild(base);
+    </script>
 </head>
 <body class="blog-page">
     <div class="container">
         <header>
             <div class="header-content">
                 <h1 class="site-title">
-                    <a href="/">Blog<br>博客</a>
+                    <a href="">Blog<br>博客</a>
                 </h1>
                 <nav class="nav-section">
                     <button class="theme-toggle" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
                     </button>
-                    <a href="/">Home</a>
-                    <a href="/blog-content/blog.html">Blog</a>
-                    <a href="/blog-content/about.html">About</a>
+                    <a href="">Home</a>
+                    <a href="blog-content/blog.html">Blog</a>
+                    <a href="blog-content/about.html">About</a>
                 </nav>
             </div>
         </header>
