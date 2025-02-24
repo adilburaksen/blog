@@ -53,7 +53,7 @@ class PostLoader {
             return this.posts;
         } catch (error) {
             console.error('Error in loadPosts:', error);
-            throw error; // Re-throw to be handled by displayPosts
+            throw error;
         }
     }
 
@@ -88,7 +88,7 @@ class PostLoader {
             postsContainer.innerHTML = posts.map(post => `
                 <article class="post-card">
                     <h2 class="post-title">
-                        <a href="/blog/${post.slug}">${post.title}</a>
+                        <a href="/blog-content/posts/${post.date.substring(0, 4)}/${post.slug}.html">${post.title}</a>
                     </h2>
                     <div class="post-meta">
                         <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', {
@@ -101,7 +101,7 @@ class PostLoader {
                     <p class="post-excerpt">${post.excerpt}</p>
                     <div class="post-tags">
                         ${post.tags.map(tag => 
-                            `<a href="/tags/${tag}" class="tag">${tag}</a>`
+                            `<a href="/blog-content/tags.html?tag=${tag}" class="tag">${tag}</a>`
                         ).join('')}
                     </div>
                 </article>
@@ -127,7 +127,7 @@ class PostLoader {
         try {
             const pathParts = window.location.pathname.split('/');
             const year = pathParts[pathParts.length - 2];
-            const slug = pathParts[pathParts.length - 1];
+            const slug = pathParts[pathParts.length - 1].replace('.html', '');
 
             console.log('Loading post content:', { year, slug });
 
@@ -185,7 +185,7 @@ class PostLoader {
             </div>
             <div class="post-tags">
                 ${post.tags.map(tag => 
-                    `<a href="/tags/${tag}" class="tag">${tag}</a>`
+                    `<a href="/blog-content/tags.html?tag=${tag}" class="tag">${tag}</a>`
                 ).join('')}
             </div>
         `;
@@ -209,7 +209,7 @@ class PostLoader {
                 <h2>Post Not Found</h2>
                 <p>Sorry, the post you're looking for doesn't exist or has been moved.</p>
                 <p class="error-details">${error.message}</p>
-                <a href="/blog">← Back to Blog</a>
+                <a href="/blog-content/blog.html">← Back to Blog</a>
             </div>
         `;
     }

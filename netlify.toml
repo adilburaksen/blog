@@ -18,14 +18,23 @@ command = ""  # No build command needed for static files
   status = 200
 
 [[redirects]]
-  from = "/blog/*"
+  from = "/blog-content/posts/*/posts.json"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blog-content/posts/*/*.md"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blog-content/posts/*/*.html"
   to = "/blog-content/post.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/tags/*"
-  to = "/blog-content/tags.html"
+  from = "/blog-content/tags.html"
   status = 200
   force = true
 
