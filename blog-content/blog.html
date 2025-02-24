@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +16,6 @@
     
     <!-- Add marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="/shared/js/main.js" defer></script>
-    <script src="/shared/js/blog-loader.js" defer></script>
 </head>
 <body class="blog-page">
     <div class="container">
@@ -58,5 +56,34 @@
             <p>&copy; 2025 All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        function displayPosts(page) {
+            const postsContainer = document.getElementById('posts');
+            if (!postsContainer) return;
+
+            const start = (page - 1) * postsPerPage;
+            const end = start + postsPerPage;
+            const postsToShow = blogPosts.slice(start, end);
+
+            postsContainer.innerHTML = postsToShow.map(post => `
+                <article class="post-card">
+                    <h2 class="post-title">
+                        <a href="/blog/${post.slug}">${post.title}</a>
+                    </h2>
+                    <div class="post-meta">
+                        ${post.date} · ${post.readTime} min read
+                    </div>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <div class="post-tags">
+                        ${post.tags.map(tag => `<a href="/tags#${tag}" class="tag">${tag}</a>`).join('')}
+                    </div>
+                </article>
+            `).join('');
+        }
+    </script>
+
+    <script src="/shared/js/main.js"></script>
+    <script src="/shared/js/blog-loader.js"></script>
 </body>
 </html>
