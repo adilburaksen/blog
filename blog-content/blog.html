@@ -6,12 +6,12 @@
     <title>Blog · 博客</title>
     
     <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="/shared/favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/shared/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/shared/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="../shared/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../shared/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../shared/favicon/favicon-16x16.png">
     
-    <link rel="stylesheet" href="/shared/css/style.css">
-    <link rel="stylesheet" href="/shared/css/blog-style.css">
+    <link rel="stylesheet" href="../shared/css/style.css">
+    <link rel="stylesheet" href="../shared/css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="blog-page">
@@ -19,15 +19,15 @@
         <header>
             <div class="header-content">
                 <h1 class="site-title">
-                    <a href="/">Blog<br>博客</a>
+                    <a href="../index.html">Blog<br>博客</a>
                 </h1>
                 <nav class="nav-section">
                     <button class="theme-toggle" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
                     </button>
-                    <a href="/">Home</a>
-                    <a href="/blog-content/blog.html">Blog</a>
-                    <a href="/blog-content/about.html">About</a>
+                    <a href="../index.html">Home</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="../about.html">About</a>
                 </nav>
             </div>
         </header>
@@ -49,7 +49,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/shared/js/main.js"></script>
-    <script src="/shared/js/blog-loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../shared/js/theme.js"></script>
+    <script src="../shared/js/blog-loader.js"></script>
 </body>
 </html>
