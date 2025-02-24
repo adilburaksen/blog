@@ -1,6 +1,14 @@
 {
     "posts": [
         {
+            "title": "Securing Modern Web Applications: A Comprehensive Guide",
+            "slug": "securing-web-applications",
+            "date": "2025-02-24",
+            "readingTime": "8",
+            "excerpt": "Explore essential security practices for modern web applications, from preventing XSS and SQL injection to implementing secure authentication and session management.",
+            "tags": ["security", "web-development", "best-practices", "cybersecurity"]
+        },
+        {
             "title": "Modern Web Development with Progressive Enhancement",
             "slug": "modern-web-development-with-progressive-enhancement",
             "date": "2025-02-24",
