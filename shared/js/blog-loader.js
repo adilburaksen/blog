@@ -3,7 +3,7 @@ class BlogLoader {
         this.blogContainer = document.getElementById('posts');
         this.loadingIndicator = document.createElement('div');
         this.loadingIndicator.className = 'loading-indicator';
-        this.loadingIndicator.textContent = 'Yükleniyor...';
+        this.loadingIndicator.textContent = 'Loading...';
         
         this.currentPage = 1;
         this.postsPerPage = 6;
@@ -25,7 +25,7 @@ class BlogLoader {
         const searchInput = document.createElement('input');
         searchInput.type = 'text';
         searchInput.className = 'search-input';
-        searchInput.placeholder = 'Blog yazılarında ara...';
+        searchInput.placeholder = 'Search blog posts...';
         
         searchContainer.appendChild(searchInput);
         this.blogContainer.parentNode.insertBefore(searchContainer, this.blogContainer);
@@ -125,7 +125,7 @@ class BlogLoader {
             this.updatePaginationUI();
         } catch (error) {
             console.error('Error loading blog posts:', error);
-            this.loadingIndicator.textContent = 'Blog yazıları yüklenirken hata oluştu. Lütfen tekrar deneyin.';
+            this.loadingIndicator.textContent = 'Error loading blog posts. Please try again.';
         } finally {
             this.loading = false;
             if (this.loadingIndicator.parentNode) {
@@ -163,7 +163,7 @@ class BlogLoader {
             this.updatePaginationUI();
         } catch (error) {
             console.error('Error loading blog posts:', error);
-            this.loadingIndicator.textContent = 'Daha fazla yazı yüklenirken hata oluştu. Lütfen tekrar deneyin.';
+            this.loadingIndicator.textContent = 'Error loading more posts. Please try again.';
         } finally {
             this.loading = false;
             if (this.loadingIndicator.parentNode) {
@@ -180,7 +180,7 @@ class BlogLoader {
         const postsToShow = this.filteredPosts.slice(start, end);
 
         this.blogContainer.innerHTML = postsToShow.map(post => {
-            const date = new Date(post.date).toLocaleDateString('tr-TR', {
+            const date = new Date(post.date).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
@@ -192,7 +192,7 @@ class BlogLoader {
                         <a href="/posts/${post.slug}">${post.title}</a>
                     </h2>
                     <div class="post-meta">
-                        ${date} · ${post.readingTime} dakika okuma süresi
+                        ${date} · ${post.readingTime} min read
                     </div>
                     <p class="post-excerpt">${post.excerpt}</p>
                     <div class="post-tags">
