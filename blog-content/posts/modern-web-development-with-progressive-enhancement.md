@@ -1,33 +1,33 @@
 # Modern Web Development with Progressive Enhancement
 
-Web geliştirme dünyası sürekli evrim geçiriyor ve modern web uygulamaları geliştirirken kullanıcı deneyimini en üst düzeye çıkarmak için Progressive Enhancement (Aşamalı İyileştirme) stratejisi giderek daha önemli hale geliyor.
+The world of web development is constantly evolving, and Progressive Enhancement strategy is becoming increasingly important for maximizing user experience when developing modern web applications.
 
-## Progressive Enhancement Nedir?
+## What is Progressive Enhancement?
 
-Progressive Enhancement, web sitelerini ve uygulamaları temel içerikten başlayarak katman katman geliştirme stratejisidir. Bu yaklaşım şu prensiplere dayanır:
+Progressive Enhancement is a strategy for developing websites and applications layer by layer, starting with the basic content. This approach is based on the following principles:
 
-1. **Temel İçerik Her Zaman Erişilebilir Olmalı**
-   - HTML ile semantik ve anlamlı içerik
-   - Tüm tarayıcılarda çalışan basit yapı
-   - JavaScript olmadan da temel işlevsellik
+1. **Basic Content Should Always Be Accessible**
+   - Semantic and meaningful content with HTML
+   - Simple structure that works in all browsers
+   - Basic functionality without JavaScript
 
-2. **Katmanlı Geliştirme**
-   - CSS ile görsel iyileştirmeler
-   - JavaScript ile gelişmiş etkileşim
-   - Modern API'ler ile ekstra özellikler
+2. **Layered Development**
+   - Visual improvements with CSS
+   - Enhanced interaction with JavaScript
+   - Extra features with modern APIs
 
-## Modern Web'de Progressive Enhancement
+## Progressive Enhancement in Modern Web
 
-### 1. HTML Temeli
+### 1. HTML Foundation
 ```html
 <article class="blog-post">
-  <h1>Blog Başlığı</h1>
-  <p>Blog içeriği...</p>
-  <button class="like-button">Beğen</button>
+  <h1>Blog Title</h1>
+  <p>Blog content...</p>
+  <button class="like-button">Like</button>
 </article>
 ```
 
-### 2. CSS ile İyileştirme
+### 2. Enhancement with CSS
 ```css
 .blog-post {
   max-width: 800px;
@@ -45,76 +45,71 @@ Progressive Enhancement, web sitelerini ve uygulamaları temel içerikten başla
 }
 ```
 
-### 3. JavaScript ile Zenginleştirme
+### 3. Enrichment with JavaScript
 ```javascript
 if ('IntersectionObserver' in window) {
-  // Lazy loading için IntersectionObserver kullan
-} else {
-  // Fallback olarak eager loading yap
-}
-```
-
-## Modern Web Özellikleri
-
-### Service Workers
-Service Workers, Progressive Web Apps'in temel taşlarından biridir. Offline çalışma, push notifications ve background sync gibi özellikleri mümkün kılar.
-
-```javascript
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(registration => {
-      console.log('Service Worker kaydedildi');
+  // Use IntersectionObserver for lazy loading
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.src = entry.target.dataset.src;
+        observer.unobserve(entry.target);
+      }
     });
+  });
+
+  document.querySelectorAll('img[data-src]').forEach(img => {
+    observer.observe(img);
+  });
 }
 ```
 
-### CSS Grid ve Flexbox
-Modern layout sistemleri, responsive tasarımı çok daha kolay hale getiriyor:
+## Benefits of Progressive Enhancement
 
-```css
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-}
-```
+1. **Better Accessibility**
+   - Content is accessible to all users
+   - Works on all devices and browsers
+   - Improved SEO performance
+
+2. **Enhanced Performance**
+   - Faster initial page load
+   - Optimized resource loading
+   - Better user experience
+
+3. **Future-Proof Development**
+   - Easier maintenance
+   - More sustainable code
+   - Better scalability
 
 ## Best Practices
 
-1. **Semantic HTML Kullanımı**
-   - `<nav>`, `<article>`, `<section>` gibi anlamlı etiketler
-   - ARIA attributes ile erişilebilirlik
-   - Doğru heading hiyerarşisi
+1. **Start with Semantic HTML**
+   - Use appropriate HTML elements
+   - Focus on content structure
+   - Ensure accessibility
 
-2. **Performans Optimizasyonu**
-   - Lazy loading
-   - Code splitting
-   - Asset optimization
+2. **Add CSS Progressively**
+   - Basic styles first
+   - Enhanced styles for modern browsers
+   - Responsive design patterns
 
-3. **Erişilebilirlik**
-   - Keyboard navigation
-   - Screen reader uyumluluğu
-   - Yeterli renk kontrastı
+3. **JavaScript as Enhancement**
+   - Core functionality without JS
+   - Feature detection
+   - Graceful degradation
 
-## Sonuç
+## Conclusion
 
-Progressive Enhancement, modern web geliştirmede hala çok önemli bir stratejidir. Bu yaklaşım:
-
-- Daha geniş kullanıcı kitlesine erişim
-- Daha iyi SEO performansı
-- Daha sürdürülebilir kod
-- Daha iyi kullanıcı deneyimi
-
-sağlar.
+Progressive Enhancement is not just a development strategy; it's a mindset that puts users first. By building web applications layer by layer, we ensure that our content is accessible to everyone while providing an enhanced experience for users with modern browsers and devices.
 
 > "Make it work, make it right, make it fast" - Kent Beck
 
-Bu prensipleri uygulayarak, hem modern özellikleri kullanan hem de temel işlevselliği her kullanıcıya sunan web uygulamaları geliştirebiliriz.
+This approach allows us to develop web applications that are both modern and accessible, providing a better user experience for everyone.
 
-## Kaynaklar ve İleri Okuma
+## Resources and Further Reading
 
 - [MDN Web Docs](https://developer.mozilla.org)
 - [web.dev](https://web.dev)
 - [CSS-Tricks](https://css-tricks.com)
 
-*Bu yazı modern web geliştirme ve Progressive Enhancement konusunda temel bir giriş niteliğindedir. Konuyla ilgili daha detaylı bilgi için kaynaklar bölümündeki linkleri inceleyebilirsiniz.*
+*This article is a basic introduction to modern web development and Progressive Enhancement. For more detailed information, please refer to the resources listed above.*
