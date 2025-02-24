@@ -1,11 +1,6 @@
 [build]
-publish = "./"
+publish = "/"
 command = ""  # No build command needed for static files
-
-[[redirects]]
-  from = "/"
-  to = "/main/index.html"
-  status = 200
 
 [[redirects]]
   from = "/blog"
@@ -13,18 +8,8 @@ command = ""  # No build command needed for static files
   status = 200
 
 [[redirects]]
-  from = "/about"
-  to = "/blog-content/about.html"
-  status = 200
-
-[[redirects]]
   from = "/posts/*"
-  to = "/blog-content/post.html?slug=:splat"
-  status = 200
-
-[[redirects]]
-  from = "/blog/*"
-  to = "/blog-content/post.html?slug=:splat"
+  to = "/blog-content/post.html"
   status = 200
 
 [[redirects]]
