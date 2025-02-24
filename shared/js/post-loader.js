@@ -88,7 +88,7 @@ class PostLoader {
             postsContainer.innerHTML = posts.map(post => `
                 <article class="post-card">
                     <h2 class="post-title">
-                        <a href="/blog-content/posts/${post.date.substring(0, 4)}/${post.slug}.html">${post.title}</a>
+                        <a href="/blog-content/posts/${post.date.substring(0, 4)}/${post.slug}.md">${post.title}</a>
                     </h2>
                     <div class="post-meta">
                         <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', {
@@ -127,7 +127,7 @@ class PostLoader {
         try {
             const pathParts = window.location.pathname.split('/');
             const year = pathParts[pathParts.length - 2];
-            const slug = pathParts[pathParts.length - 1].replace('.html', '');
+            const slug = pathParts[pathParts.length - 1].replace('.md', '');
 
             console.log('Loading post content:', { year, slug });
 

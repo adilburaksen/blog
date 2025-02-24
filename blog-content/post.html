@@ -13,11 +13,6 @@
     <link rel="stylesheet" href="/shared/css/style.css">
     <link rel="stylesheet" href="/shared/css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Add marked.js for Markdown parsing -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="/shared/js/main.js" defer></script>
-    <script src="/shared/js/post-loader.js" defer></script>
 </head>
 <body class="post-page">
     <div class="container">
@@ -26,20 +21,14 @@
                 <h1 class="site-title">
                     <a href="/">Blog<br>博客</a>
                 </h1>
-                <div class="nav-section">
+                <nav class="nav-section">
                     <button class="theme-toggle" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
                     </button>
-                    <nav>
-                        <div class="main-nav">
-                            <a href="/">Home</a>
-                            <a href="/blog">Blog</a>
-                        </div>
-                        <div class="about-nav">
-                            <a href="/about">About</a>
-                        </div>
-                    </nav>
-                </div>
+                    <a href="/">Home</a>
+                    <a href="/blog-content/blog.html">Blog</a>
+                    <a href="/blog-content/about.html">About</a>
+                </nav>
             </div>
         </header>
 
@@ -48,16 +37,17 @@
                 <div id="post-content">
                     <!-- Post content will be loaded here -->
                 </div>
-                <div class="post-navigation">
-                    <a href="#" class="prev-post" style="display: none;">← Previous Post</a>
-                    <a href="#" class="next-post" style="display: none;">Next Post →</a>
-                </div>
             </article>
         </main>
 
         <footer>
-            <p>&copy; 2025 All rights reserved.</p>
+            <p>&copy; 2024 All rights reserved.</p>
         </footer>
     </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/shared/js/theme.js"></script>
+    <script src="/shared/js/post-loader.js"></script>
 </body>
 </html>

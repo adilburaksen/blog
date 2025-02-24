@@ -18,23 +18,14 @@ command = ""  # No build command needed for static files
   status = 200
 
 [[redirects]]
-  from = "/blog-content/posts/*/posts.json"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/blog-content/posts/*/*.md"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/blog-content/posts/*/*.html"
+  from = "/blog-content/posts/*"
   to = "/blog-content/post.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/blog-content/tags.html"
+  from = "/blog-content/tags"
+  to = "/blog-content/tags.html"
   status = 200
   force = true
 
@@ -52,10 +43,10 @@ command = ""  # No build command needed for static files
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = """
       default-src 'self' https:; 
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; 
-      style-src 'self' 'unsafe-inline' https:; 
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https: cdn.jsdelivr.net cdnjs.cloudflare.com; 
+      style-src 'self' 'unsafe-inline' https: cdnjs.cloudflare.com; 
       img-src 'self' data: https:; 
-      font-src 'self' https:; 
+      font-src 'self' https: cdnjs.cloudflare.com; 
       connect-src 'self' https:; 
       media-src 'self' https:; 
       object-src 'none';
@@ -63,4 +54,13 @@ command = ""  # No build command needed for static files
       form-action 'self';
       base-uri 'self';
       """
-    Permissions-Policy = "autoplay=(), camera=(), geolocation=(), microphone=()"
+
+[[headers]]
+  for = "/*.json"
+  [headers.values]
+    Content-Type = "application/json"
+
+[[headers]]
+  for = "/*.md"
+  [headers.values]
+    Content-Type = "text/markdown"
