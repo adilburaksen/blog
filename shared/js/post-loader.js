@@ -4,9 +4,9 @@ class PostLoader {
         this.prevPostLink = document.querySelector('.prev-post');
         this.nextPostLink = document.querySelector('.next-post');
         
-        // Get slug from URL - now comes from /blog/ path
-        const pathParts = window.location.pathname.split('/');
-        this.currentSlug = pathParts[pathParts.length - 1];
+        // Get slug from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        this.currentSlug = urlParams.get('slug');
         this.currentPost = null;
         this.allPosts = [];
         
@@ -100,13 +100,13 @@ class PostLoader {
         
         if (currentIndex > 0) {
             const prevPost = this.allPosts[currentIndex - 1];
-            this.prevPostLink.href = `/blog/${prevPost.slug}`;
+            this.prevPostLink.href = `/blog?slug=${prevPost.slug}`;
             this.prevPostLink.style.display = 'inline-block';
         }
         
         if (currentIndex < this.allPosts.length - 1) {
             const nextPost = this.allPosts[currentIndex + 1];
-            this.nextPostLink.href = `/blog/${nextPost.slug}`;
+            this.nextPostLink.href = `/blog?slug=${nextPost.slug}`;
             this.nextPostLink.style.display = 'inline-block';
         }
     }

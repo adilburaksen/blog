@@ -189,7 +189,7 @@ class BlogLoader {
             return `
                 <article class="post-card">
                     <h2 class="post-title">
-                        <a href="/posts/${post.slug}">${post.title}</a>
+                        <a href="/blog-content/post.html?slug=${post.slug}">${post.title}</a>
                     </h2>
                     <div class="post-meta">
                         ${date} · ${post.readingTime} min read
