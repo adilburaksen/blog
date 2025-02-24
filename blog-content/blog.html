@@ -6,12 +6,12 @@
     <title>Blog · 博客</title>
     
     <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="/shared/favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/shared/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/shared/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="../shared/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../shared/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../shared/favicon/favicon-16x16.png">
     
-    <link rel="stylesheet" href="/shared/css/style.css">
-    <link rel="stylesheet" href="/shared/css/blog-style.css">
+    <link rel="stylesheet" href="../shared/css/style.css">
+    <link rel="stylesheet" href="../shared/css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
@@ -25,40 +25,38 @@
     </script>
 </head>
 <body class="blog-page">
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <div class="settings">
-                    <button class="theme-toggle" aria-label="Toggle theme">
-                        <i class="fas fa-sun"></i>
-                    </button>
+    <header class="header">
+        <nav class="nav-section">
+            <div class="nav-content">
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="../about.html">About</a>
                 </div>
-                <nav>
-                    <a href="/">Home</a>
-                    <a href="/blog">Blog</a>
-                    <a href="/about">About</a>
-                </nav>
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                </button>
             </div>
-        </header>
+        </nav>
+    </header>
 
-        <main>
-            <section class="blog-section">
-                <div class="search-section">
-                    <input type="text" id="searchInput" placeholder="Search blog posts..." class="search-input">
-                </div>
-                <div id="posts-grid" class="posts-grid">
-                    <!-- Posts will be loaded here -->
-                </div>
-            </section>
-        </main>
+    <main class="main-content">
+        <div class="blog-section">
+            <div class="search-section">
+                <input type="text" id="searchInput" placeholder="Search blog posts..." class="search-input">
+            </div>
+            <div id="posts-grid" class="posts-grid">
+                <!-- Posts will be loaded here -->
+            </div>
+        </div>
+    </main>
 
-        <footer>
-            <p>&copy; 2025 All rights reserved.</p>
-        </footer>
-    </div>
+    <footer class="footer">
+        <p>&copy; 2025 All rights reserved.</p>
+    </footer>
 
     <!-- Scripts -->
-    <script src="/shared/js/main.js"></script>
-    <script src="/shared/js/blog-loader.js"></script>
+    <script src="../shared/js/main.js"></script>
+    <script src="../shared/js/blog-loader.js"></script>
 </body>
 </html>
