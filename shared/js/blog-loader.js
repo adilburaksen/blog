@@ -59,28 +59,31 @@ class BlogLoader {
     }
 
     async loadPosts() {
-        if (!this.blogContainer) return;
-        
-        this.loading = true;
-        this.blogContainer.appendChild(this.loadingIndicator);
-
         try {
-            const response = await fetch('/blog-content/posts/posts.json');
-            if (!response.ok) throw new Error('Failed to load posts');
-
+            this.blogContainer.appendChild(this.loadingIndicator);
+            
+            const currentYear = new Date().getFullYear();
+            const response = await fetch(`/blog-content/posts/${currentYear}/posts.json`);
+            
+            if (!response.ok) {
+                throw new Error(`Failed to load posts: ${response.status}`);
+            }
+            
             const data = await response.json();
-            this.posts = data.posts || [];
+            this.posts = data.posts;
             this.filteredPosts = [...this.posts];
             
             this.displayPosts();
         } catch (error) {
-            console.error('Error loading blog posts:', error);
-            this.loadingIndicator.textContent = 'Error loading blog posts. Please try again.';
+            console.error('Error loading posts:', error);
+            this.blogContainer.innerHTML = `
+                <div class="error-message">
+                    <h2>Failed to load blog posts</h2>
+                    <p>Please try again later. If the problem persists, contact the site administrator.</p>
+                </div>
+            `;
         } finally {
-            this.loading = false;
-            if (this.loadingIndicator.parentNode) {
-                this.loadingIndicator.parentNode.removeChild(this.loadingIndicator);
-            }
+            this.loadingIndicator.remove();
         }
     }
 
