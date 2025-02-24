@@ -5,30 +5,17 @@ class BlogLoader {
         this.loadingIndicator.className = 'loading-indicator';
         this.loadingIndicator.textContent = 'Loading...';
         
-        this.currentPage = 1;
-        this.postsPerPage = 6;
-        this.loading = false;
-        this.allLoaded = false;
         this.posts = [];
         this.filteredPosts = [];
         
         this.setupSearch();
         this.setupBackToTop();
-        this.setupPagination();
-        this.loadInitialPosts();
+        this.loadPosts();
     }
 
     setupSearch() {
-        const searchContainer = document.createElement('div');
-        searchContainer.className = 'search-container';
-        
-        const searchInput = document.createElement('input');
-        searchInput.type = 'text';
-        searchInput.className = 'search-input';
-        searchInput.placeholder = 'Search blog posts...';
-        
-        searchContainer.appendChild(searchInput);
-        this.blogContainer.parentNode.insertBefore(searchContainer, this.blogContainer);
+        const searchInput = document.getElementById('searchInput');
+        if (!searchInput) return;
 
         let debounceTimeout;
         searchInput.addEventListener('input', () => {
@@ -61,38 +48,6 @@ class BlogLoader {
         });
     }
 
-    setupPagination() {
-        const prevButton = document.getElementById('prevPage');
-        const nextButton = document.getElementById('nextPage');
-        const currentPageSpan = document.getElementById('currentPage');
-
-        prevButton.addEventListener('click', () => {
-            if (this.currentPage > 1) {
-                this.currentPage--;
-                this.displayPosts();
-                this.updatePaginationUI();
-            }
-        });
-
-        nextButton.addEventListener('click', () => {
-            if (!this.allLoaded) {
-                this.currentPage++;
-                this.loadMorePosts();
-                this.updatePaginationUI();
-            }
-        });
-    }
-
-    updatePaginationUI() {
-        const prevButton = document.getElementById('prevPage');
-        const nextButton = document.getElementById('nextPage');
-        const currentPageSpan = document.getElementById('currentPage');
-
-        prevButton.disabled = this.currentPage === 1;
-        nextButton.disabled = this.allLoaded;
-        currentPageSpan.textContent = this.currentPage;
-    }
-
     filterPosts(searchTerm) {
         searchTerm = searchTerm.toLowerCase();
         this.filteredPosts = this.posts.filter(post => {
@@ -100,29 +55,24 @@ class BlogLoader {
                    post.excerpt.toLowerCase().includes(searchTerm) ||
                    post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
         });
-        this.currentPage = 1;
         this.displayPosts();
-        this.updatePaginationUI();
     }
 
-    async loadInitialPosts() {
+    async loadPosts() {
+        if (!this.blogContainer) return;
+        
         this.loading = true;
         this.blogContainer.appendChild(this.loadingIndicator);
 
         try {
-            const response = await fetch('/blog-content/posts/page-1.json');
+            const response = await fetch('/blog-content/posts/posts.json');
             if (!response.ok) throw new Error('Failed to load posts');
 
             const data = await response.json();
             this.posts = data.posts || [];
             this.filteredPosts = [...this.posts];
             
-            if (this.posts.length < this.postsPerPage) {
-                this.allLoaded = true;
-            }
-
             this.displayPosts();
-            this.updatePaginationUI();
         } catch (error) {
             console.error('Error loading blog posts:', error);
             this.loadingIndicator.textContent = 'Error loading blog posts. Please try again.';
@@ -134,50 +84,10 @@ class BlogLoader {
         }
     }
 
-    async loadMorePosts() {
-        if (this.loading || this.allLoaded) return;
-
-        this.loading = true;
-        this.blogContainer.appendChild(this.loadingIndicator);
-
-        try {
-            const response = await fetch(`/blog-content/posts/page-${this.currentPage}.json`);
-            if (!response.ok) {
-                if (response.status === 404) {
-                    this.allLoaded = true;
-                    return;
-                }
-                throw new Error('Failed to load posts');
-            }
-
-            const data = await response.json();
-            const newPosts = data.posts || [];
-            
-            if (newPosts.length === 0 || newPosts.length < this.postsPerPage) {
-                this.allLoaded = true;
-            }
-
-            this.posts = [...this.posts, ...newPosts];
-            this.filteredPosts = [...this.posts];
-            this.displayPosts();
-            this.updatePaginationUI();
-        } catch (error) {
-            console.error('Error loading blog posts:', error);
-            this.loadingIndicator.textContent = 'Error loading more posts. Please try again.';
-        } finally {
-            this.loading = false;
-            if (this.loadingIndicator.parentNode) {
-                this.loadingIndicator.parentNode.removeChild(this.loadingIndicator);
-            }
-        }
-    }
-
     displayPosts() {
         if (!this.blogContainer) return;
 
-        const start = (this.currentPage - 1) * this.postsPerPage;
-        const end = start + this.postsPerPage;
-        const postsToShow = this.filteredPosts.slice(start, end);
+        const postsToShow = this.filteredPosts;
 
         this.blogContainer.innerHTML = postsToShow.map(post => {
             const date = new Date(post.date).toLocaleDateString('en-US', {
