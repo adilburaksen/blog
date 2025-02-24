@@ -1,57 +1,46 @@
-.blog-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.posts-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem 0;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.post-card {
-    background: rgba(255, 255, 255, 0.05);
+.blog-post {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
     border-radius: 8px;
-    padding: 2rem;
-    transition: transform 0.2s ease-in-out;
-    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
 
-.post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.blog-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.post-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    line-height: 1.3;
+.blog-post h2 {
+    margin: 0 0 1rem;
+    font-size: 1.8rem;
 }
 
-.post-title a {
-    color: var(--text-primary);
+.blog-post h2 a {
+    color: #333;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.post-title a:hover {
-    color: var(--accent-color);
+.blog-post h2 a:hover {
+    color: #007bff;
 }
 
 .post-meta {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
     margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.post-meta span {
+    margin-right: 1rem;
 }
 
 .post-excerpt {
-    font-size: 1rem;
+    margin-bottom: 1rem;
     line-height: 1.6;
-    color: var(--text-primary);
-    margin-bottom: 1.5rem;
+    color: #444;
 }
 
 .post-tags {
@@ -61,122 +50,49 @@
 }
 
 .tag {
-    background: var(--tag-bg);
-    color: var(--tag-text);
     padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
+    border-radius: 15px;
+    background: #f0f0f0;
+    color: #666;
+    font-size: 0.8rem;
+    transition: background 0.2s ease;
 }
 
 .tag:hover {
-    background: var(--tag-bg-hover);
+    background: #e0e0e0;
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.pagination-btn {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.pagination-btn:hover {
-    background: var(--button-bg-hover);
-}
-
-.pagination-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-#currentPage {
-    font-weight: 600;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .blog-section {
-        padding: 1rem;
-    }
-
-    .posts-grid {
-        padding: 1rem 0;
-    }
-
-    .post-card {
-        padding: 1rem;
-    }
-
-    .post-title {
-        font-size: 1.3rem;
-    }
-}
-
-/* Back to Top Button */
-.back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--accent-color);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
-}
-
-.back-to-top.visible {
-    opacity: 1;
-}
-
-/* Loading State */
 .loading-indicator {
     text-align: center;
     padding: 2rem;
-    color: var(--text-secondary);
+    color: #666;
+    font-style: italic;
 }
 
-/* Search Bar */
-.search-section {
-    margin: 2rem auto;
-    max-width: 800px;
-    padding: 0 1rem;
+/* Skeleton loading animation */
+.blog-post.loading {
+    animation: pulse 1.5s infinite;
 }
 
-.search-input {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-color);
-    font-size: 1rem;
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-.search-input:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-}
+/* Responsive design */
+@media (max-width: 768px) {
+    .blog-post {
+        padding: 1rem;
+    }
 
-.search-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    .blog-post h2 {
+        font-size: 1.5rem;
+    }
 }
