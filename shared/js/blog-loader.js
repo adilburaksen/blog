@@ -57,13 +57,13 @@ class BlogLoader {
 
     async loadPosts() {
         try {
-            const response = await fetch('/blog-content/posts/index.json');
+            const response = await fetch('/blog/blog-content/posts/index.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const posts = await response.json();
-            this.posts = posts;
-            this.filteredPosts = posts;
+            const data = await response.json();
+            this.posts = data.posts;
+            this.filteredPosts = this.posts;
             this.renderPosts();
         } catch (error) {
             console.error('Error loading posts:', error);
@@ -96,9 +96,12 @@ class BlogLoader {
                 day: 'numeric'
             });
 
+            // Ensure URLs start with /blog/
+            const postUrl = post.url.startsWith('/blog/') ? post.url : '/blog' + post.url;
+
             postCard.innerHTML = `
                 <h2 class="post-title">
-                    <a href="${post.url}">${post.title}</a>
+                    <a href="${postUrl}">${post.title}</a>
                 </h2>
                 <div class="post-meta">
                     <span class="post-date">${formattedDate}</span>
