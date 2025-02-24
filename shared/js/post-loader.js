@@ -10,6 +10,7 @@ class PostLoader {
         
         this.currentPost = null;
         this.allPosts = [];
+        this.currentYear = new Date().getFullYear();
         
         this.init();
     }
@@ -27,7 +28,7 @@ class PostLoader {
 
     async loadAllPosts() {
         try {
-            const response = await fetch('/blog-content/posts/posts.json');
+            const response = await fetch(`/blog-content/posts/${this.currentYear}/posts.json`);
             if (!response.ok) {
                 throw new Error('Failed to load posts');
             }
@@ -53,7 +54,7 @@ class PostLoader {
         }
 
         try {
-            const response = await fetch(`/blog-content/posts/${this.currentSlug}.md`);
+            const response = await fetch(`/blog-content/posts/${this.currentYear}/${this.currentSlug}.md`);
             if (!response.ok) {
                 throw new Error('Failed to load post content');
             }
@@ -99,7 +100,7 @@ class PostLoader {
             this.prevPostLink.style.display = 'inline-block';
             this.prevPostLink.innerHTML = `← ${prevPost.title}`;
         }
-        
+
         if (currentIndex < this.allPosts.length - 1) {
             const nextPost = this.allPosts[currentIndex + 1];
             this.nextPostLink.href = `/posts/${nextPost.slug}`;
@@ -109,14 +110,12 @@ class PostLoader {
     }
 
     showError() {
-        if (this.postContent) {
-            this.postContent.innerHTML = `
-                <div class="error-message">
-                    <h1>Post Not Found</h1>
-                    <p>The post you're looking for could not be found. Please return to the <a href="/blog">blog home page</a>.</p>
-                </div>
-            `;
-        }
+        this.postContent.innerHTML = `
+            <div class="error-message">
+                <h2>Post Not Found</h2>
+                <p>Sorry, the requested post could not be found. Please check the URL or return to the <a href="/blog">blog listing</a>.</p>
+            </div>
+        `;
     }
 }
 
