@@ -18,41 +18,18 @@ command = ""  # No build command needed for static files
   status = 200
 
 [[redirects]]
-  from = "https://blog.hackwith.me"
-  to = "/blog-content/blog.html"
-  status = 200
-
-[[redirects]]
-  from = "https://blog.hackwith.me/about"
-  to = "/blog-content/about.html"
-  status = 200
-
-[[redirects]]
-  from = "https://blog.hackwith.me/*"
-  to = "/blog-content/:splat"
+  from = "/posts/*"
+  to = "/blog-content/post.html?slug=:splat"
   status = 200
 
 [[redirects]]
   from = "/blog/*"
-  to = "/post.html?slug=:splat"
+  to = "/blog-content/post.html?slug=:splat"
   status = 200
-  force = true
-
-[[redirects]]
-  from = "http://hackwith.me/*"
-  to = "https://hackwith.me/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://blog.hackwith.me/*"
-  to = "https://blog.hackwith.me/:splat"
-  status = 301
-  force = true
 
 [[redirects]]
   from = "/*"
-  to = "/shared/404.html"
+  to = "/404.html"
   status = 404
 
 [[headers]]

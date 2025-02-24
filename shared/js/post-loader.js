@@ -100,13 +100,13 @@ class PostLoader {
         
         if (currentIndex > 0) {
             const prevPost = this.allPosts[currentIndex - 1];
-            this.prevPostLink.href = `/blog?slug=${prevPost.slug}`;
+            this.prevPostLink.href = `/posts/${prevPost.slug}`;
             this.prevPostLink.style.display = 'inline-block';
         }
         
         if (currentIndex < this.allPosts.length - 1) {
             const nextPost = this.allPosts[currentIndex + 1];
-            this.nextPostLink.href = `/blog?slug=${nextPost.slug}`;
+            this.nextPostLink.href = `/posts/${nextPost.slug}`;
             this.nextPostLink.style.display = 'inline-block';
         }
     }

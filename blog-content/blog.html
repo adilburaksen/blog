@@ -11,7 +11,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/shared/favicon/favicon-16x16.png">
     
     <link rel="stylesheet" href="/shared/css/style.css">
+    <link rel="stylesheet" href="/shared/css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Add marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body class="blog-page">
     <div class="container">
@@ -68,7 +72,7 @@
             postsContainer.innerHTML = postsToShow.map(post => `
                 <article class="post-card">
                     <h2 class="post-title">
-                        <a href="/?slug=${post.slug}">${post.title}</a>
+                        <a href="/blog/${post.slug}">${post.title}</a>
                     </h2>
                     <div class="post-meta">
                         ${post.date} · ${post.readTime} min read
@@ -83,6 +87,6 @@
     </script>
 
     <script src="/shared/js/main.js"></script>
-    <script src="/shared/js/posts.js"></script>
+    <script src="/shared/js/blog-loader.js"></script>
 </body>
 </html>
