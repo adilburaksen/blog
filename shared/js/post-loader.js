@@ -11,6 +11,7 @@ class PostLoader {
         this.currentPost = null;
         this.allPosts = [];
         this.currentYear = new Date().getFullYear();
+        this.currentTag = new URLSearchParams(window.location.search).get('tag');
         
         this.init();
     }
@@ -28,15 +29,28 @@ class PostLoader {
 
     async loadAllPosts() {
         try {
-            const response = await fetch(`/blog-content/posts/${this.currentYear}/posts.json`);
-            if (!response.ok) {
-                throw new Error('Failed to load posts');
+            const years = ['2025']; // Add more years as needed
+            this.allPosts = [];
+
+            for (const year of years) {
+                const response = await fetch(`/blog-content/posts/${year}/posts.json`);
+                if (!response.ok) {
+                    console.error(`Failed to load posts for year ${year}`);
+                    continue;
+                }
+                const yearPosts = await response.json();
+                this.allPosts.push(...yearPosts);
             }
-            const data = await response.json();
-            this.allPosts = data.posts;
-            
-            // Sort posts by date
+
+            // Sort posts by date in descending order
             this.allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Filter by tag if one is selected
+            if (this.currentTag) {
+                this.allPosts = this.allPosts.filter(post => 
+                    post.tags && post.tags.includes(this.currentTag)
+                );
+            }
         } catch (error) {
             throw new Error('Failed to load posts list');
         }
