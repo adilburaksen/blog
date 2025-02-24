@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="/shared/css/style.css">
     <link rel="stylesheet" href="/shared/css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 </head>
 <body class="blog-page">
     <div class="container">
@@ -22,16 +21,14 @@
                 <h1 class="site-title">
                     <a href="/">Blog<br>博客</a>
                 </h1>
-                <div class="nav-section">
+                <nav class="nav-section">
                     <button class="theme-toggle" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
                     </button>
-                    <nav>
-                        <a href="/">Home</a>
-                        <a href="/blog-content/blog.html">Blog</a>
-                        <a href="/blog-content/about.html">About</a>
-                    </nav>
-                </div>
+                    <a href="/">Home</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/about">About</a>
+                </nav>
             </div>
         </header>
 
@@ -40,7 +37,7 @@
                 <div class="search-section">
                     <input type="text" id="searchInput" placeholder="Search blog posts..." class="search-input">
                 </div>
-                <div class="posts-grid" id="posts-grid">
+                <div id="posts-grid" class="posts-grid">
                     <!-- Posts will be loaded here -->
                 </div>
             </section>
@@ -51,8 +48,9 @@
         </footer>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="/shared/js/theme.js"></script>
     <script src="/shared/js/post-loader.js"></script>
-    <script src="/shared/js/main.js"></script>
 </body>
 </html>
