@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Başlangıç on Hack With Me</title>
+    <link>http://localhost:1313/tags/ba%C5%9Flang%C4%B1%C3%A7/</link>
+    <description>Recent content in Başlangıç on Hack With Me</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Feb 2025 05:58:04 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ba%C5%9Flang%C4%B1%C3%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Merhaba Dunya</title>
+      <link>http://localhost:1313/posts/merhaba-dunya/</link>
+      <pubDate>Mon, 24 Feb 2025 05:58:04 +0300</pubDate>
+      <guid>http://localhost:1313/posts/merhaba-dunya/</guid>
+      <description>&lt;p&gt;Merhaba! Bu benim Hack With Me blogundaki ilk yazım. Bu blog siber güvenlik, teknoloji ve yazılım geliştirme konularında içerikler paylaşacağım bir platform olacak.&lt;/p&gt;&#xA;&lt;h2 id=&#34;ne-tür-içerikler-paylaşacağım&#34;&gt;Ne Tür İçerikler Paylaşacağım?&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Siber güvenlik araştırmaları ve bulguları&lt;/li&gt;&#xA;&lt;li&gt;Güvenlik açıklarının analizi&lt;/li&gt;&#xA;&lt;li&gt;Programlama ve yazılım geliştirme ipuçları&lt;/li&gt;&#xA;&lt;li&gt;Teknoloji haberleri ve değerlendirmeleri&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;neden-bu-blog&#34;&gt;Neden Bu Blog?&lt;/h2&gt;&#xA;&lt;p&gt;Amacım öğrendiklerimi paylaşmak ve toplulukla birlikte büyümek. Siber güvenlik ve teknoloji alanında Türkçe kaynak eksikliğini gidermek için elimden geleni yapacağım.&lt;/p&gt;&#xA;&lt;p&gt;Takipte kalın!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

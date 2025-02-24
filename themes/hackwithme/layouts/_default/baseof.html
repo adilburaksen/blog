@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}Home · 主页{{ else if eq .Type "posts" }}Blog · 博客{{ else }}{{ .Title }} · 关于{{ end }}</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="{{ if .IsHome }}home-page{{ else }}{{ .Type }}-page{{ end }}">
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="site-title">
+                    <a href="/">{{ if .IsHome }}Home<br>主页{{ else if eq .Type "posts" }}Blog<br>博客{{ else }}About<br>关于{{ end }}</a>
+                </h1>
+                <div class="nav-section">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="far fa-lightbulb"></i>
+                    </button>
+                    <div class="nav-links">
+                        <div class="main-nav">
+                            {{ range .Site.Menus.main }}
+                            <a href="{{ .URL }}">{{ .Name }}</a>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            {{ block "main" . }}{{ end }}
+        </main>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
