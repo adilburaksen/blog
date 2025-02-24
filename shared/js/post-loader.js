@@ -26,24 +26,13 @@ class PostLoader {
 
     async loadAllPosts() {
         try {
-            const response = await fetch('/blog-content/posts/page-1.json');
+            const response = await fetch('/blog-content/posts.json');
             if (!response.ok) {
                 throw new Error('Failed to load posts');
             }
             const data = await response.json();
             this.allPosts = data.posts;
             
-            // Try loading page 2 if exists
-            try {
-                const response2 = await fetch('/blog-content/posts/page-2.json');
-                if (response2.ok) {
-                    const data2 = await response2.json();
-                    this.allPosts = [...this.allPosts, ...data2.posts];
-                }
-            } catch (error) {
-                // It's okay if page 2 doesn't exist
-            }
-
             // Sort posts by date
             this.allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
         } catch (error) {
@@ -55,6 +44,10 @@ class PostLoader {
         if (!this.currentSlug) {
             throw new Error('No post slug specified');
         }
+
+        const currentPath = window.location.pathname;
+        const slugFromPath = currentPath.split('/posts/')[1];
+        this.currentSlug = slugFromPath || this.currentSlug;
 
         this.currentPost = this.allPosts.find(post => post.slug === this.currentSlug);
         
