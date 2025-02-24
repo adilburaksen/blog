@@ -16,6 +16,8 @@
     
     <!-- Add marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/shared/js/main.js" defer></script>
+    <script src="/shared/js/blog-loader.js" defer></script>
 </head>
 <body class="blog-page">
     <div class="container">
@@ -26,15 +28,15 @@
                 </h1>
                 <div class="nav-section">
                     <button class="theme-toggle" aria-label="Toggle theme">
-                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
                     </button>
                     <div class="nav-links">
                         <div class="main-nav">
                             <a href="/">Home</a>
-                            <a href="/blog">Blog</a>
+                            <a href="/blog.html">Blog</a>
                         </div>
                         <div class="about-nav">
-                            <a href="/about">About</a>
+                            <a href="/about.html">About</a>
                         </div>
                     </div>
                 </div>
@@ -56,33 +58,5 @@
             <p>&copy; 2025 All rights reserved.</p>
         </footer>
     </div>
-
-    <script src="/shared/js/main.js"></script>
-    <script src="/shared/js/blog-loader.js"></script>
-    <script>
-        function displayPosts(page) {
-            const postsContainer = document.getElementById('posts');
-            if (!postsContainer) return;
-
-            const start = (page - 1) * postsPerPage;
-            const end = start + postsPerPage;
-            const postsToShow = blogPosts.slice(start, end);
-
-            postsContainer.innerHTML = postsToShow.map(post => `
-                <article class="post-card">
-                    <h2 class="post-title">
-                        <a href="/blog/${post.slug}">${post.title}</a>
-                    </h2>
-                    <div class="post-meta">
-                        ${post.date} · ${post.readTime} min read
-                    </div>
-                    <p class="post-excerpt">${post.excerpt}</p>
-                    <div class="post-tags">
-                        ${post.tags.map(tag => `<a href="/tags#${tag}" class="tag">${tag}</a>`).join('')}
-                    </div>
-                </article>
-            `).join('');
-        }
-    </script>
 </body>
 </html>
