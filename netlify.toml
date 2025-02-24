@@ -19,7 +19,7 @@ command = ""  # No build command needed for static files
 
 [[redirects]]
   from = "/about"
-  to = "/about.html"
+  to = "/blog-content/about.html"
   status = 200
 
 [[redirects]]
