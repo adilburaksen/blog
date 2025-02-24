@@ -1,41 +1,32 @@
 :root {
-    /* Light theme variables */
+    /* Light theme as default */
     --bg-color: #ffffff;
     --text-color: #1a1a1a;
-    --text-muted: #666666;
-    --border-color: #e0e0e0;
-    --primary-color: #0066cc;
-    --primary-color-alpha: rgba(0, 102, 204, 0.2);
-    --tag-bg: #f0f0f0;
-    --tag-text: #666666;
-    --tag-bg-hover: #e0e0e0;
-    --code-bg: #f5f5f5;
+    --primary-color: #2563eb;
     --secondary-color: #6b7280;
+    --border-color: #e2e8f0;
     --secondary-bg: #f8fafc;
     --accent-color: #6d28d9;
+    --tag-bg: #f8fafc;
+    --tag-hover: #e2e8f0;
     --header-bg: rgba(255, 255, 255, 0.95);
     --card-bg: #ffffff;
     --hover-bg: #f8fafc;
 }
 
 [data-theme="dark"] {
-    /* Dark theme variables */
     --bg-color: #0a0a0a;
     --text-color: #e5e5e5;
-    --text-muted: #999999;
-    --border-color: #222222;
-    --primary-color: #66b3ff;
-    --primary-color-alpha: rgba(102, 179, 255, 0.2);
-    --tag-bg: #222222;
-    --tag-text: #e5e5e5;
-    --tag-bg-hover: #333333;
-    --code-bg: #1a1a1a;
+    --primary-color: #3b82f6;
     --secondary-color: #6b7280;
-    --secondary-bg: #151515;
+    --border-color: #27272a;
+    --secondary-bg: #18181b;
     --accent-color: #8b5cf6;
+    --tag-bg: #27272a;
+    --tag-hover: #333333;
     --header-bg: rgba(10, 10, 10, 0.95);
-    --card-bg: #151515;
-    --hover-bg: #1a1a1a;
+    --card-bg: #18181b;
+    --hover-bg: #27272a;
 }
 
 * {
@@ -319,7 +310,7 @@ header {
 }
 
 .tag:hover {
-    background-color: var(--tag-bg-hover);
+    background-color: var(--tag-hover);
 }
 
 /* Tag Cloud Styles */
@@ -345,7 +336,7 @@ header {
 }
 
 .tag-cloud .tag:hover {
-    background-color: var(--tag-bg-hover);
+    background-color: var(--tag-hover);
     transform: translateY(-1px);
 }
 
@@ -493,7 +484,7 @@ header {
 }
 
 .pagination-btn:hover:not(:disabled) {
-    background-color: var(--primary-color-alpha);
+    background-color: var(--primary-color-dark);
 }
 
 .pagination-btn:disabled {
@@ -965,6 +956,7 @@ footer {
     text-decoration: none;
     color: var(--text-color);
     transition: all 0.2s ease;
+    border-radius: 4px;
 }
 
 .social-link i {

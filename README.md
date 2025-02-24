@@ -1,84 +1,53 @@
-# Personal Blog
+# 👋 Merhaba, Ben Adil Burak ŞEN!
 
-This repository contains the source code for my personal blog, hosted at [hackwith.me](https://hackwith.me).
+[![GitHub followers](https://img.shields.io/github/followers/adilburaksen?style=social)](https://github.com/adilburaksen)
+[![Twitter Follow](https://img.shields.io/twitter/follow/adilburaksen?style=social)](https://twitter.com/adilburaksen)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/adilburaksen)
 
-## Features
+## 👨‍💻 Hakkımda
 
-- Clean and minimalist design
-- Responsive layout for all devices
-- Dark mode support
-- Blog with tag-based categorization
-- Fast loading and optimized performance
-- SEO friendly
-- PWA support
-- Offline reading capability
-- Custom 404 and 500 error pages
+- 🔭 Şu anda yazılım geliştirici olarak çalışıyorum
+- 🌱 Sürekli yeni teknolojiler öğreniyorum
+- 💬 Web geliştirme, mobil uygulama ve yazılım mimarisi konularında sohbet edebiliriz
+- 📫 Bana ulaşmak için: [E-posta](mailto:adilburaksen@gmail.com)
 
-## Project Structure
+## 🛠 Teknoloji Stack'im
 
-```
-blog/
-├── blog-content/           # Blog content
-│   ├── about.html         # About page
-│   ├── blog.html          # Blog listing
-│   ├── post.html          # Post template
-│   ├── tags.html          # Tags page
-│   └── posts/             # Blog posts
-│       └── 2025/          # Posts organized by year
-│           ├── posts.json # Post metadata
-│           └── *.md       # Markdown files
-├── shared/                # Shared assets
-│   ├── css/              # Stylesheets
-│   ├── js/               # JavaScript files
-│   │   ├── blog-loader.js    # Blog listing loader
-│   │   ├── post-loader.js    # Post content loader
-│   │   ├── service-worker.js # PWA service worker
-│   │   └── tags.js          # Tag system
-│   ├── favicon/          # Favicon assets
-│   ├── 404.html         # 404 error page
-│   └── 500.html         # 500 error page
-├── index.html           # Home page
-├── manifest.json        # PWA manifest
-├── robots.txt          # Search engine directives
-├── sitemap.xml         # Site map
-├── netlify.toml        # Netlify configuration
-├── CHANGELOG.md        # Change log
-└── README.md           # This file
-```
+### Programlama Dilleri
+![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![PHP](https://img.shields.io/badge/-PHP-777BB4?style=flat-square&logo=php&logoColor=white)
 
-## Technology Stack
+### Frontend Geliştirme
+![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 
-- HTML5 & CSS3
-- Vanilla JavaScript
-- Markdown for content
-- PWA (Progressive Web App)
-- Service Workers for offline support
-- Netlify for hosting and deployment
+### Backend Geliştirme
+![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
+![Laravel](https://img.shields.io/badge/-Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white)
 
-## Getting Started
+### Veritabanları
+![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/adilburaksen/blog.git
-   cd blog
-   ```
+### Araçlar & DevOps
+![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
+![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![VS Code](https://img.shields.io/badge/-VS%20Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white)
 
-2. Local Development:
-   - Use a local server (e.g., Live Server in VS Code)
-   - Or use Python's built-in server:
-     ```bash
-     python -m http.server 8000
-     ```
+## 📊 GitHub İstatistiklerim
 
-3. Creating New Posts:
-   - Add a new Markdown file in `blog-content/posts/YEAR/`
-   - Update `blog-content/posts/YEAR/posts.json` with post metadata
-   - Follow the existing post format
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=adilburaksen&show_icons=true&theme=radical)
 
-## Deployment
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=adilburaksen&layout=compact&theme=radical)
 
-The site is automatically deployed to Netlify when changes are pushed to the main branch.
+## 📫 İletişim
 
-## License
+- Website: [adilburaksen.com.tr](https://adilburaksen.com.tr)
+- Twitter: [@adilburaksen](https://twitter.com/adilburaksen)
+- LinkedIn: [adilburaksen](https://linkedin.com/in/adilburaksen)
+- Email: adilburaksen@gmail.com
 
-This project is open source and available under the MIT License.
+---
+⭐️ [adilburaksen](https://github.com/adilburaksen)

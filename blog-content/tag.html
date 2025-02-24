@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag · 部落格</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="tag-page">
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="site-title">
+                    <a href="index.html">Tag<br>标签</a>
+                </h1>
+                <div class="nav-section">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="nav-links">
+                        <div class="main-nav">
+                            <a href="index.html">Home</a>
+                            <a href="blog.html">Blog</a>
+                            <a href="tags.html">Tags</a>
+                        </div>
+                        <div class="about-nav">
+                            <a href="about.html">About</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="tag-posts-section">
+                <h2 id="tag-title">Posts tagged with "<span id="current-tag"></span>"</h2>
+                <div id="posts" class="posts-grid">
+                    <!-- Posts will be injected here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Adil Burak Şen. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/posts.js"></script>
+    <script>
+        // Get the tag from URL and display posts
+        const tag = getUrlParameter('tag');
+        if (tag) {
+            document.getElementById('current-tag').textContent = tag;
+            const filteredPosts = blogPosts.filter(post => post.tags.includes(tag));
+            const postsContainer = document.getElementById('posts');
+            
+            if (filteredPosts.length === 0) {
+                postsContainer.innerHTML = '<div class="no-posts">No posts found with this tag.</div>';
+            } else {
+                postsContainer.innerHTML = filteredPosts.map(post => `
+                    <article class="post-card">
+                        <h2><a href="post.html?slug=${post.slug}">${post.title}</a></h2>
+                        <div class="post-meta">
+                            <span class="date">${post.date}</span>
+                            <span class="read-time">${post.readTime} min read</span>
+                        </div>
+                        <p class="excerpt">${post.excerpt}</p>
+                        <div class="tags">
+                            ${post.tags.map(t => `
+                                <a href="tag.html?tag=${t}" class="tag">${t}</a>
+                            `).join('')}
+                        </div>
+                    </article>
+                `).join('');
+            }
+        } else {
+            window.location.href = 'tags.html';
+        }
+    </script>
+</body>
+</html>

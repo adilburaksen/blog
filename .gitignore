@@ -1,41 +1,6 @@
-# OS generated files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE/Editor
+node_modules/
+.env
+*.log
 .vscode/
 .idea/
-*.sublime-workspace
-*.sublime-project
-
-# Logs and databases
-*.log
-*.sql
-*.sqlite
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# Dependencies
-node_modules/
-package-lock.json
-yarn.lock
-
-# Build output
-dist/
-build/
-out/
-.cache/
-
-# Temporary files
-*.tmp
-*.temp
-*.swp
-*~

@@ -1,10 +1,10 @@
 [build]
-publish = "/"
+publish = "./"
 command = ""  # No build command needed for static files
 
 [[redirects]]
   from = "/"
-  to = "/index.html"
+  to = "/main/index.html"
   status = 200
 
 [[redirects]]
@@ -18,15 +18,30 @@ command = ""  # No build command needed for static files
   status = 200
 
 [[redirects]]
-  from = "/blog-content/posts/*"
-  to = "/blog-content/post.html"
+  from = "https://blog.hackwith.me"
+  to = "/blog-content/blog.html"
   status = 200
+
+[[redirects]]
+  from = "https://blog.hackwith.me/about"
+  to = "/blog-content/about.html"
+  status = 200
+
+[[redirects]]
+  from = "https://blog.hackwith.me/*"
+  to = "/blog-content/:splat"
+  status = 200
+
+[[redirects]]
+  from = "http://hackwith.me/*"
+  to = "https://hackwith.me/:splat"
+  status = 301
   force = true
 
 [[redirects]]
-  from = "/blog-content/tags"
-  to = "/blog-content/tags.html"
-  status = 200
+  from = "http://blog.hackwith.me/*"
+  to = "https://blog.hackwith.me/:splat"
+  status = 301
   force = true
 
 [[redirects]]
@@ -36,31 +51,9 @@ command = ""  # No build command needed for static files
 
 [[headers]]
   for = "/*"
-  [headers.values]
+    [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = """
-      default-src 'self' https:; 
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https: cdn.jsdelivr.net cdnjs.cloudflare.com; 
-      style-src 'self' 'unsafe-inline' https: cdnjs.cloudflare.com; 
-      img-src 'self' data: https:; 
-      font-src 'self' https: cdnjs.cloudflare.com; 
-      connect-src 'self' https:; 
-      media-src 'self' https:; 
-      object-src 'none';
-      frame-ancestors 'none';
-      form-action 'self';
-      base-uri 'self';
-      """
-
-[[headers]]
-  for = "/*.json"
-  [headers.values]
-    Content-Type = "application/json"
-
-[[headers]]
-  for = "/*.md"
-  [headers.values]
-    Content-Type = "text/markdown"
+    Referrer-Policy = "no-referrer"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app *.hackwith.me cdnjs.cloudflare.com;"
