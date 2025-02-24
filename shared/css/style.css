@@ -430,17 +430,18 @@ header {
 .post-card {
     background: var(--secondary-bg);
     border-radius: 8px;
-    padding: 1.5rem;
+    padding: 1.25rem;
     transition: all 0.3s ease;
+    margin-bottom: 1rem;
 }
 
 .post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .post-card h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .post-card h2 a {
@@ -463,6 +464,7 @@ header {
 .excerpt {
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    color: var(--text-color);
 }
 
 .pagination {
@@ -1515,4 +1517,53 @@ header {
         font-size: 1.25rem;
         margin-bottom: 1rem;
     }
+}
+
+.social-links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 400px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--secondary-bg);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-2px);
+    color: var(--primary-color);
+}
+
+.social-link i {
+    font-size: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .site-title {
+        font-size: 3rem;
+    }
+
+    .post-title {
+        font-size: 1.5rem;
+    }
+}
+
+::selection {
+    background: var(--primary-color);
+    color: white;
 }
