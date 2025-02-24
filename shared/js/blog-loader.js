@@ -1,30 +1,137 @@
 class BlogLoader {
     constructor() {
-        this.blogContainer = document.getElementById('blog-content');
+        this.blogContainer = document.getElementById('posts');
         this.loadingIndicator = document.createElement('div');
         this.loadingIndicator.className = 'loading-indicator';
-        this.loadingIndicator.textContent = 'Loading...';
+        this.loadingIndicator.textContent = 'Yükleniyor...';
         
         this.currentPage = 1;
-        this.postsPerPage = 5;
+        this.postsPerPage = 6;
         this.loading = false;
         this.allLoaded = false;
+        this.posts = [];
+        this.filteredPosts = [];
         
-        // Infinite scroll
-        this.setupInfiniteScroll();
+        this.setupSearch();
+        this.setupBackToTop();
+        this.setupPagination();
+        this.loadInitialPosts();
     }
 
-    setupInfiniteScroll() {
+    setupSearch() {
+        const searchContainer = document.createElement('div');
+        searchContainer.className = 'search-container';
+        
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.className = 'search-input';
+        searchInput.placeholder = 'Blog yazılarında ara...';
+        
+        searchContainer.appendChild(searchInput);
+        this.blogContainer.parentNode.insertBefore(searchContainer, this.blogContainer);
+
+        let debounceTimeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                this.filterPosts(searchInput.value);
+            }, 300);
+        });
+    }
+
+    setupBackToTop() {
+        const backToTop = document.createElement('button');
+        backToTop.className = 'back-to-top';
+        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        document.body.appendChild(backToTop);
+
         window.addEventListener('scroll', () => {
-            if (this.loading || this.allLoaded) return;
-
-            const scrollPosition = window.innerHeight + window.scrollY;
-            const contentHeight = document.body.offsetHeight;
-
-            if (scrollPosition >= contentHeight - 800) { // 800px before bottom
-                this.loadMorePosts();
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
             }
         });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    setupPagination() {
+        const prevButton = document.getElementById('prevPage');
+        const nextButton = document.getElementById('nextPage');
+        const currentPageSpan = document.getElementById('currentPage');
+
+        prevButton.addEventListener('click', () => {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.displayPosts();
+                this.updatePaginationUI();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (!this.allLoaded) {
+                this.currentPage++;
+                this.loadMorePosts();
+                this.updatePaginationUI();
+            }
+        });
+    }
+
+    updatePaginationUI() {
+        const prevButton = document.getElementById('prevPage');
+        const nextButton = document.getElementById('nextPage');
+        const currentPageSpan = document.getElementById('currentPage');
+
+        prevButton.disabled = this.currentPage === 1;
+        nextButton.disabled = this.allLoaded;
+        currentPageSpan.textContent = this.currentPage;
+    }
+
+    filterPosts(searchTerm) {
+        searchTerm = searchTerm.toLowerCase();
+        this.filteredPosts = this.posts.filter(post => {
+            return post.title.toLowerCase().includes(searchTerm) ||
+                   post.excerpt.toLowerCase().includes(searchTerm) ||
+                   post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+        });
+        this.currentPage = 1;
+        this.displayPosts();
+        this.updatePaginationUI();
+    }
+
+    async loadInitialPosts() {
+        this.loading = true;
+        this.blogContainer.appendChild(this.loadingIndicator);
+
+        try {
+            const response = await fetch('/blog-content/posts/page-1.json');
+            if (!response.ok) throw new Error('Failed to load posts');
+
+            const data = await response.json();
+            this.posts = data.posts || [];
+            this.filteredPosts = [...this.posts];
+            
+            if (this.posts.length < this.postsPerPage) {
+                this.allLoaded = true;
+            }
+
+            this.displayPosts();
+            this.updatePaginationUI();
+        } catch (error) {
+            console.error('Error loading blog posts:', error);
+            this.loadingIndicator.textContent = 'Blog yazıları yüklenirken hata oluştu. Lütfen tekrar deneyin.';
+        } finally {
+            this.loading = false;
+            if (this.loadingIndicator.parentNode) {
+                this.loadingIndicator.parentNode.removeChild(this.loadingIndicator);
+            }
+        }
     }
 
     async loadMorePosts() {
@@ -44,22 +151,19 @@ class BlogLoader {
             }
 
             const data = await response.json();
-            const posts = data.posts;
+            const newPosts = data.posts || [];
             
-            if (!posts || posts.length === 0) {
-                this.allLoaded = true;
-                return;
-            }
-
-            if (posts.length < this.postsPerPage) {
+            if (newPosts.length === 0 || newPosts.length < this.postsPerPage) {
                 this.allLoaded = true;
             }
 
-            await this.renderPosts(posts);
-            this.currentPage++;
+            this.posts = [...this.posts, ...newPosts];
+            this.filteredPosts = [...this.posts];
+            this.displayPosts();
+            this.updatePaginationUI();
         } catch (error) {
             console.error('Error loading blog posts:', error);
-            this.loadingIndicator.textContent = 'Error loading posts. Please try again.';
+            this.loadingIndicator.textContent = 'Daha fazla yazı yüklenirken hata oluştu. Lütfen tekrar deneyin.';
         } finally {
             this.loading = false;
             if (this.loadingIndicator.parentNode) {
@@ -68,48 +172,39 @@ class BlogLoader {
         }
     }
 
-    async renderPosts(posts) {
-        const fragment = document.createDocumentFragment();
+    displayPosts() {
+        if (!this.blogContainer) return;
 
-        for (const post of posts) {
-            const article = document.createElement('article');
-            article.className = 'blog-post';
-            
+        const start = (this.currentPage - 1) * this.postsPerPage;
+        const end = start + this.postsPerPage;
+        const postsToShow = this.filteredPosts.slice(start, end);
+
+        this.blogContainer.innerHTML = postsToShow.map(post => {
             const date = new Date(post.date).toLocaleDateString('tr-TR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
-            
-            article.innerHTML = `
-                <h2><a href="/posts/${post.slug}">${post.title}</a></h2>
-                <div class="post-meta">
-                    <span class="date">${date}</span>
-                    <span class="author">${post.author}</span>
-                    <span class="reading-time">${post.readingTime} okuma süresi</span>
-                </div>
-                <div class="post-excerpt">${post.excerpt}</div>
-                <div class="post-tags">
-                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
+
+            return `
+                <article class="post-card">
+                    <h2 class="post-title">
+                        <a href="/posts/${post.slug}">${post.title}</a>
+                    </h2>
+                    <div class="post-meta">
+                        ${date} · ${post.readingTime} dakika okuma süresi
+                    </div>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <div class="post-tags">
+                        ${post.tags.map(tag => `<a href="/tags#${tag}" class="tag">${tag}</a>`).join('')}
+                    </div>
+                </article>
             `;
-
-            // Lazy load images if any
-            const images = article.getElementsByTagName('img');
-            Array.from(images).forEach(img => {
-                img.loading = 'lazy';
-                img.decoding = 'async';
-            });
-
-            fragment.appendChild(article);
-        }
-
-        this.blogContainer.appendChild(fragment);
+        }).join('');
     }
 }
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    const blogLoader = new BlogLoader();
-    blogLoader.loadMorePosts(); // Load initial posts
+    new BlogLoader();
 });
