@@ -60,10 +60,10 @@ class PostLoader {
     async displayPosts() {
         try {
             console.log('Displaying posts...');
-            const postsContainer = document.querySelector('.posts-grid');
+            const postsContainer = document.getElementById('posts-grid');
             
             if (!postsContainer) {
-                throw new Error('Posts container (.posts-grid) not found');
+                throw new Error('Posts container (#posts-grid) not found');
             }
 
             const posts = await this.loadPosts();
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.blog-post')) {
         console.log('Blog post page detected');
         postLoader.loadPostContent();
-    } else if (document.querySelector('.posts-grid')) {
+    } else if (document.getElementById('posts-grid')) {
         console.log('Blog listing page detected');
         postLoader.displayPosts();
     } else {
