@@ -1,115 +1,116 @@
 class BlogLoader {
     constructor() {
-        this.blogContainer = document.getElementById('blog-content');
+        this.blogContainer = document.getElementById('posts-grid');
         this.loadingIndicator = document.createElement('div');
         this.loadingIndicator.className = 'loading-indicator';
         this.loadingIndicator.textContent = 'Loading...';
-        
-        this.currentPage = 1;
-        this.postsPerPage = 5;
-        this.loading = false;
-        this.allLoaded = false;
-        
-        // Infinite scroll
-        this.setupInfiniteScroll();
+
+        // Get the base path for assets
+        const currentPath = window.location.pathname;
+        this.basePath = currentPath.includes('/blog-content/') ? '..' : '';
+
+        this.posts = [];
+        this.filteredPosts = [];
+
+        if (this.blogContainer) {
+            this.blogContainer.appendChild(this.loadingIndicator);
+        } else {
+            console.error('Blog container not found!');
+            return;
+        }
+
+        this.setupSearch();
+        this.loadPosts();
     }
 
-    setupInfiniteScroll() {
-        window.addEventListener('scroll', () => {
-            if (this.loading || this.allLoaded) return;
-
-            const scrollPosition = window.innerHeight + window.scrollY;
-            const contentHeight = document.body.offsetHeight;
-
-            if (scrollPosition >= contentHeight - 800) { // 800px before bottom
-                this.loadMorePosts();
-            }
-        });
-    }
-
-    async loadMorePosts() {
-        if (this.loading || this.allLoaded) return;
-
-        this.loading = true;
-        this.blogContainer.appendChild(this.loadingIndicator);
-
+    async loadPosts() {
         try {
-            const response = await fetch(`/blog-content/posts/page-${this.currentPage}.json`);
+            const response = await fetch(`${this.basePath}/blog-content/posts/index.json`);
             if (!response.ok) {
-                if (response.status === 404) {
-                    this.allLoaded = true;
-                    return;
-                }
-                throw new Error('Failed to load posts');
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-
             const data = await response.json();
-            const posts = data.posts;
-            
-            if (!posts || posts.length === 0) {
-                this.allLoaded = true;
-                return;
-            }
-
-            if (posts.length < this.postsPerPage) {
-                this.allLoaded = true;
-            }
-
-            await this.renderPosts(posts);
-            this.currentPage++;
+            this.posts = data.posts.map(post => ({
+                ...post,
+                url: `${this.basePath}${post.url}` // Add basePath to URLs
+            }));
+            this.filteredPosts = this.posts;
+            this.renderPosts();
         } catch (error) {
-            console.error('Error loading blog posts:', error);
-            this.loadingIndicator.textContent = 'Error loading posts. Please try again.';
-        } finally {
-            this.loading = false;
-            if (this.loadingIndicator.parentNode) {
-                this.loadingIndicator.parentNode.removeChild(this.loadingIndicator);
-            }
+            console.error('Error loading posts:', error);
+            this.loadingIndicator.textContent = 'Error loading posts. Please try again later.';
         }
     }
 
-    async renderPosts(posts) {
-        const fragment = document.createDocumentFragment();
+    renderPosts() {
+        if (!this.blogContainer) return;
 
-        for (const post of posts) {
-            const article = document.createElement('article');
-            article.className = 'blog-post';
-            
-            const date = new Date(post.date).toLocaleDateString('tr-TR', {
+        this.blogContainer.removeChild(this.loadingIndicator);
+        this.blogContainer.innerHTML = '';
+
+        if (this.filteredPosts.length === 0) {
+            const noResults = document.createElement('div');
+            noResults.className = 'no-results';
+            noResults.textContent = 'No posts found.';
+            this.blogContainer.appendChild(noResults);
+            return;
+        }
+
+        this.filteredPosts.forEach(post => {
+            const postCard = document.createElement('article');
+            postCard.className = 'post-card';
+
+            const date = new Date(post.date);
+            const formattedDate = date.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
-            
-            article.innerHTML = `
-                <h2><a href="/posts/${post.slug}">${post.title}</a></h2>
+
+            postCard.innerHTML = `
+                <h2 class="post-title">
+                    <a href="${post.url}">${post.title}</a>
+                </h2>
                 <div class="post-meta">
-                    <span class="date">${date}</span>
-                    <span class="author">${post.author}</span>
-                    <span class="reading-time">${post.readingTime} okuma süresi</span>
+                    <span class="post-date">${formattedDate}</span>
+                    ${post.tags ? `<span class="post-tags">${post.tags.map(tag => `#${tag}`).join(' ')}</span>` : ''}
                 </div>
-                <div class="post-excerpt">${post.excerpt}</div>
-                <div class="post-tags">
-                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
+                ${post.excerpt ? `<p class="post-excerpt">${post.excerpt}</p>` : ''}
             `;
 
-            // Lazy load images if any
-            const images = article.getElementsByTagName('img');
-            Array.from(images).forEach(img => {
-                img.loading = 'lazy';
-                img.decoding = 'async';
-            });
+            this.blogContainer.appendChild(postCard);
+        });
+    }
 
-            fragment.appendChild(article);
-        }
+    filterPosts(searchTerm) {
+        searchTerm = searchTerm.toLowerCase().trim();
 
-        this.blogContainer.appendChild(fragment);
+        this.filteredPosts = this.posts.filter(post => {
+            const titleMatch = post.title.toLowerCase().includes(searchTerm);
+            const tagsMatch = post.tags ? post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) : false;
+            const excerptMatch = post.excerpt ? post.excerpt.toLowerCase().includes(searchTerm) : false;
+
+            return titleMatch || tagsMatch || excerptMatch;
+        });
+
+        this.renderPosts();
+    }
+
+    setupSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (!searchInput) return;
+
+        let debounceTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                this.filterPosts(e.target.value);
+            }, 300);
+        });
     }
 }
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    const blogLoader = new BlogLoader();
-    blogLoader.loadMorePosts(); // Load initial posts
+    new BlogLoader();
 });
