@@ -15,8 +15,12 @@ class PostLoader {
                     console.error(`Failed to load posts for year ${year}`);
                     continue;
                 }
-                const yearPosts = await response.json();
-                this.posts.push(...yearPosts);
+                const data = await response.json();
+                if (data.posts && Array.isArray(data.posts)) {
+                    this.posts.push(...data.posts);
+                } else {
+                    console.error(`Invalid posts data format for year ${year}`);
+                }
             }
 
             // Sort posts by date in descending order
@@ -73,7 +77,7 @@ class PostLoader {
                         month: 'long',
                         day: 'numeric'
                     })}</time>
-                    · ${post.readingTime} read
+                    · ${post.readingTime} min read
                 </div>
                 <p class="post-excerpt">${post.excerpt}</p>
                 <div class="post-tags">
@@ -95,8 +99,8 @@ class PostLoader {
             const response = await fetch(`/blog-content/posts/${year}/posts.json`);
             if (!response.ok) throw new Error('Failed to load post metadata');
             
-            const posts = await response.json();
-            const post = posts.find(p => p.slug === slug);
+            const data = await response.json();
+            const post = data.posts.find(p => p.slug === slug);
             
             if (!post) throw new Error('Post not found');
 
@@ -119,6 +123,9 @@ class PostLoader {
         const postContainer = document.querySelector('.blog-post');
         if (!postContainer) return;
 
+        // Clear existing content
+        postContainer.innerHTML = '';
+
         // Update page title
         document.title = `${post.title} · Blog`;
 
@@ -133,7 +140,7 @@ class PostLoader {
                     month: 'long',
                     day: 'numeric'
                 })}</time>
-                · ${post.readingTime} read
+                · ${post.readingTime} min read
             </div>
             <div class="post-tags">
                 ${post.tags.map(tag => 
