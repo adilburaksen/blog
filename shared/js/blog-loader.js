@@ -5,8 +5,9 @@ class BlogLoader {
         this.loadingIndicator.className = 'loading-indicator';
         this.loadingIndicator.textContent = 'Loading...';
 
-        // Determine if we're accessing through /blog or directly
-        this.basePath = window.location.pathname.startsWith('/blog') ? '/blog' : '';
+        // Get the base path for assets
+        const currentPath = window.location.pathname;
+        this.basePath = currentPath.includes('/blog-content/') ? '..' : '';
 
         this.posts = [];
         this.filteredPosts = [];
@@ -19,20 +20,19 @@ class BlogLoader {
         }
 
         this.setupSearch();
-        this.setupBackToTop();
         this.loadPosts();
     }
 
     async loadPosts() {
         try {
-            const response = await fetch(this.basePath + '/blog-content/posts/index.json');
+            const response = await fetch(`${this.basePath}/blog-content/posts/index.json`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
             this.posts = data.posts.map(post => ({
                 ...post,
-                url: this.basePath + post.url // Add basePath to URLs
+                url: `${this.basePath}${post.url}` // Add basePath to URLs
             }));
             this.filteredPosts = this.posts;
             this.renderPosts();
@@ -101,33 +101,11 @@ class BlogLoader {
         if (!searchInput) return;
 
         let debounceTimeout;
-        searchInput.addEventListener('input', () => {
+        searchInput.addEventListener('input', (e) => {
             clearTimeout(debounceTimeout);
             debounceTimeout = setTimeout(() => {
-                this.filterPosts(searchInput.value);
+                this.filterPosts(e.target.value);
             }, 300);
-        });
-    }
-
-    setupBackToTop() {
-        const backToTop = document.createElement('button');
-        backToTop.className = 'back-to-top';
-        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-        document.body.appendChild(backToTop);
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         });
     }
 }
