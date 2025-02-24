@@ -1,20 +1,20 @@
 {
-  "name": "Hack With Me",
-  "short_name": "HackWithMe",
-  "description": "Personal website and blog about technology, programming, and cybersecurity",
+  "name": "Adil Burak Şen",
+  "short_name": "AdilBurak",
+  "description": "Personal website and blog about web development, programming, and technology",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
   "icons": [
     {
-      "src": "/shared/favicon/android-chrome-192x192.png",
-      "sizes": "192x192",
+      "src": "/shared/favicon/favicon-32x32.png",
+      "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/shared/favicon/android-chrome-512x512.png",
-      "sizes": "512x512",
+      "src": "/shared/favicon/favicon-16x16.png",
+      "sizes": "16x16",
       "type": "image/png"
     }
   ]

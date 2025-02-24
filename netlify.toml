@@ -24,7 +24,7 @@ command = ""  # No build command needed for static files
 
 [[redirects]]
   from = "/*"
-  to = "/404.html"
+  to = "/shared/404.html"
   status = 404
 
 [[headers]]
