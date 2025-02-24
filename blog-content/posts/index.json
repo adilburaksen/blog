@@ -3,35 +3,35 @@
         {
             "title": "Securing Modern Web Applications: A Comprehensive Guide",
             "date": "2025-02-24",
-            "url": "/blog-content/posts/2025/securing-web-applications.md",
+            "url": "/blog-content/posts/2025/securing-web-applications.html",
             "excerpt": "Explore essential security practices for modern web applications, from preventing XSS and SQL injection to implementing secure authentication and session management.",
             "tags": ["security", "web-development", "best-practices", "cybersecurity"]
         },
         {
             "title": "Modern Web Development with Progressive Enhancement",
             "date": "2025-02-24",
-            "url": "/blog-content/posts/2025/modern-web-development-with-progressive-enhancement.md",
+            "url": "/blog-content/posts/2025/modern-web-development-with-progressive-enhancement.html",
             "excerpt": "Progressive enhancement is a strategy for web design that emphasizes core webpage content first, then progressively adds more nuanced and technically rigorous layers of presentation and features on top of the content as the end-user's browser/internet connection allow.",
             "tags": ["web-development", "progressive-enhancement", "frontend"]
         },
         {
             "title": "The Future of JavaScript Development",
             "date": "2025-02-23",
-            "url": "/blog-content/posts/2025/future-of-javascript-development.md",
+            "url": "/blog-content/posts/2025/future-of-javascript-development.html",
             "excerpt": "As we look ahead to the future of JavaScript development, several exciting trends are emerging. From WebAssembly integration to enhanced type safety with TypeScript, the JavaScript ecosystem continues to evolve and improve.",
             "tags": ["javascript", "webassembly", "typescript"]
         },
         {
             "title": "Building Fast and Reliable Web Applications",
             "date": "2025-02-22",
-            "url": "/blog-content/posts/2025/building-fast-reliable-web-applications.md",
+            "url": "/blog-content/posts/2025/building-fast-reliable-web-applications.html",
             "excerpt": "Learn how to build performant and reliable web applications using modern best practices. From code splitting to service workers, discover techniques to enhance your web app's speed and reliability.",
             "tags": ["web-development", "performance", "reliability"]
         },
         {
             "title": "Mastering CSS Grid Layout",
             "date": "2025-02-21",
-            "url": "/blog-content/posts/2025/mastering-css-grid-layout.md",
+            "url": "/blog-content/posts/2025/mastering-css-grid-layout.html",
             "excerpt": "CSS Grid Layout is a powerful tool for creating complex web layouts. Learn how to master this layout system and create responsive designs with ease.",
             "tags": ["css", "grid-layout", "web-design"]
         }
