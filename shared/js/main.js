@@ -9,7 +9,8 @@ function initTheme() {
     // Update initial icon if theme toggle exists
     const themeToggle = document.querySelector('.theme-toggle i');
     if (themeToggle) {
-        themeToggle.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        // Show sun icon in dark mode (to switch to light), moon icon in light mode (to switch to dark)
+        themeToggle.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     }
 }
 
@@ -23,7 +24,8 @@ function toggleTheme() {
     // Update icon
     const themeIcon = document.querySelector('.theme-toggle i');
     if (themeIcon) {
-        themeIcon.className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        // Show sun icon in dark mode (to switch to light), moon icon in light mode (to switch to dark)
+        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     }
 }
 
