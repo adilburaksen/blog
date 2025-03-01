@@ -1,31 +1,30 @@
-# Blog Projesi
+## Deployment
 
-Bu proje, kullanıcıların içerik oluşturmasına ve paylaşmasına olanak tanıyan bir blog uygulamasıdır. Hugo ile geliştirilmiştir.
+The project is configured for Netlify deployment. Ensure you have a Netlify account and connect your repository.
 
-## Kurulum
+## Contributing
 
-1. Depoyu klonlayın:
-   ```bash
-   git clone https://github.com/adilburaksen/blog.git
-   ```
-2. Gerekli bağımlılıkları yükleyin:
-   ```bash
-   cd blog
-   npm install
-   ```
+Contributions are welcome! Please follow these steps:
 
-## Kullanım
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Projeyi başlatmak için:
-```bash
-hugo server
-```
-Tarayıcınızda `http://localhost:1313` adresine gidin.
+## License
 
-## Katkıda Bulunma
+Distributed under the MIT License. See `LICENSE` for more information.
 
-Katkılar her zaman hoş karşılanır! Lütfen önerilerinizi ve hatalarınızı bildirin.
+## Contact
 
-## Lisans
+Adil Burak Şen
+- GitHub: [@adilburaksen](https://github.com/adilburaksen)
+- Twitter: [@adilburaksen](https://twitter.com/adilburaksen)
+- LinkedIn: [Adil Burak Şen](https://linkedin.com/in/adilburaksen)
 
-Bu proje [MIT Lisansı](LICENSE) altında lisanslanmıştır.
+## Acknowledgments
+
+- [Hugo](https://gohugo.io/)
+- [Netlify](https://www.netlify.com/)
+- Open-source community
