@@ -21,6 +21,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Adil Burak Şen
 - GitHub: [@adilburaksen](https://github.com/adilburaksen)
 - Twitter: [@adilburaksen](https://twitter.com/adilburaksen)
+- Email: [adilburaksen@proton.me](mailto:adilburaksen@proton.me)
 - LinkedIn: [Adil Burak Şen](https://linkedin.com/in/adilburaksen)
 
 ## Acknowledgments

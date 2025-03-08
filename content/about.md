@@ -23,3 +23,4 @@ You can find me on:
 - [GitHub](https://github.com/adilburaksen)
 - [Twitter](https://twitter.com/adilburaksen)
 - [LinkedIn](https://linkedin.com/in/adilburaksen)
+- Email: adilburaksen@proton.me
