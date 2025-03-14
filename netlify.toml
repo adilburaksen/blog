@@ -1,6 +1,7 @@
 [build]
   command = "npx @11ty/eleventy"
   publish = "_site"
+  environment = { NODE_VERSION = "18" }
 
 [dev]
   command = "npx @11ty/eleventy --serve"
