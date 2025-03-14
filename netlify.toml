@@ -1,70 +1,7 @@
 [build]
-  publish = "public"
-  command = "hugo --gc --minify"
+  command = "npx @11ty/eleventy"
+  publish = "_site"
 
-[build.environment]
-  HUGO_VERSION = "0.122.0"
-  HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
-
-[context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
-
-[context.branch-deploy]
-  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
-
-[[redirects]]
-  from = "/"
-  to = "/main/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog"
-  to = "/blog-content/blog.html"
-  status = 200
-
-[[redirects]]
-  from = "/about"
-  to = "/blog-content/about.html"
-  status = 200
-
-[[redirects]]
-  from = "https://blog.hackwith.me"
-  to = "/blog-content/blog.html"
-  status = 200
-
-[[redirects]]
-  from = "https://blog.hackwith.me/about"
-  to = "/blog-content/about.html"
-  status = 200
-
-[[redirects]]
-  from = "https://blog.hackwith.me/*"
-  to = "/blog-content/:splat"
-  status = 200
-
-[[redirects]]
-  from = "http://hackwith.me/*"
-  to = "https://hackwith.me/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://blog.hackwith.me/*"
-  to = "https://blog.hackwith.me/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/shared/404.html"
-  status = 404
-
-[[headers]]
-  for = "/*"
-    [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer"
-    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app *.hackwith.me cdnjs.cloudflare.com;"
+[dev]
+  command = "npx @11ty/eleventy --serve"
+  targetPort = 8080

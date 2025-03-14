@@ -1,0 +1,18 @@
+---
+layout: layout.njk
+title: Tag Archive
+permalink: "/tags/{{ tag | slug }}/index.html"
+---
+
+<h2><span class="prompt">$</span> tag: {{ tag }}</h2>
+<p>Posts tagged with <code>#{{ tag }}</code>:</p>
+
+{% for post in collections.posts %}
+  {% if post.data.tags contains tag %}
+    <article>
+      <h3><a href="{{ post.url }}"><span class="prompt">$</span> {{ post.data.title }}</a></h3>
+      <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | dateDisplay }}</time>
+      <p>{{ post.data.description }}</p>
+    </article>
+  {% endif %}
+{% endfor %}

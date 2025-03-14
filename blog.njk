@@ -1,0 +1,22 @@
+{% extends "layout.njk" %}
+{% block content %}
+  <h2><span class="prompt">$</span> blog</h2>
+  <p>All posts in the hackwith.me archive.</p>
+
+  {% for post in collections.posts %}
+    <article>
+      <h3><a href="{{ post.url }}"><span class="prompt">$</span> {{ post.data.title }}</a></h3>
+      <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | dateDisplay }}</time>
+      <p>{{ post.data.description }}</p>
+
+      {% if post.data.tags %}
+        <p>
+          Tags:
+          {% for tag in post.data.tags %}
+            <a href="/tags/{{ tag | slug }}/">#{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </p>
+      {% endif %}
+    </article>
+  {% endfor %}
+{% endblock %}
