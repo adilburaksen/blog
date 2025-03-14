@@ -4,32 +4,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A minimal, original hacker-themed blog for hackwith.me">
-  <title>{{ title }} | hackwith.me</title>
+  <title>{{ title }} - hackwith.me</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <meta name="description" content="A hacker's blog about security, programming, and technology">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/hacker.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
 </head>
-<body>
-  <header>
-    <h1><span class="prompt">$</span> hackwith.me</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/blog">Blog</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </header>
+<body class="terminal-effect">
+  <div class="container">
+    <header>
+      <h1><span class="prompt">root@hackwith.me:~$</span> cd /home/blog</h1>
+      <nav>
+        <span class="prompt">blog$</span>
+        <a href="/">home</a>
+        <a href="/blog">posts</a>
+        <a href="/search">search</a>
+        <a href="/about">about</a>
+        <a href="/contact">contact</a>
+      </nav>
+    </header>
 
-  <main>
-    {{ content | safe }}
-  </main>
+    <main>
+      {{ content | safe }}
+    </main>
 
-  <footer>
-    <p><code>nmap -sC -sV hackwith.me</code></p>
-    <p>&copy; {{ year }} hackwith.me</p>
-  </footer>
+    <footer>
+      <p>
+        <span class="prompt">blog$</span> echo "© {{ '' | date('yyyy') }} hackwith.me | Built with 11ty and ❤️"
+      </p>
+      <p class="cursor">
+        <span class="prompt">blog$</span> _
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Add terminal typing effect to headers
+    document.querySelectorAll('h1, h2, h3').forEach(header => {
+      if (!header.querySelector('.prompt')) {
+        const text = header.textContent;
+        header.innerHTML = `<span class="prompt">$</span> ${text}`;
+      }
+    });
+  </script>
 </body>
 </html>

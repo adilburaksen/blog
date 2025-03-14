@@ -1,0 +1,119 @@
+---
+layout: layout.njk
+---
+
+<article class="post terminal-post">
+  <header class="post-header">
+    <p class="command-line">
+      <span class="prompt">blog$</span> cat {{ page.fileSlug }}.md
+    </p>
+    <h1>{{ title }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date('yyyy-MM-dd') }}">
+        <span class="prompt">$</span> date
+        {{ page.date | dateDisplay }}
+      </time>
+      {% if tags %}
+      <div class="tags">
+        <span class="prompt">$</span> grep -l "tags"
+        {% for tag in tags %}
+          <a href="/tags/{{ tag | slug }}/">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{ content | safe }}
+  </div>
+
+  <footer class="post-footer">
+    <div class="share">
+      <p class="command-line">
+        <span class="prompt">$</span> share {{ page.fileSlug }}
+      </p>
+      <a href="https://twitter.com/intent/tweet?text={{ title | urlencode }}&url={{ page.url | urlencode }}" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | urlencode }}&title={{ title | urlencode }}" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+</article>
+
+<nav class="post-nav">
+  {% if collections.posts %}
+    {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+    {% set nextPost = collections.posts | getNextCollectionItem(page) %}
+
+    <div class="nav-links">
+      {% if previousPost %}
+        <a href="{{ previousPost.url }}" class="prev">
+          <span class="prompt">$</span> cd ../{{ previousPost.fileSlug }}
+        </a>
+      {% endif %}
+
+      {% if nextPost %}
+        <a href="{{ nextPost.url }}" class="next">
+          <span class="prompt">$</span> cd ../{{ nextPost.fileSlug }}
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+</nav>
+
+<style>
+.terminal-post {
+  background: rgba(0, 255, 0, 0.05);
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.command-line {
+  color: var(--text-color);
+  font-family: monospace;
+  margin-bottom: 10px;
+}
+
+.post-meta {
+  margin: 15px 0;
+  font-size: 0.9em;
+}
+
+.tags a {
+  margin-right: 10px;
+  color: var(--link-color);
+}
+
+.post-content {
+  margin: 20px 0;
+}
+
+.post-nav {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.share {
+  margin-top: 30px;
+}
+
+.share a {
+  margin-right: 15px;
+  color: var(--link-color);
+}
+</style> 

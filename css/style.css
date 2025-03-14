@@ -1,63 +1,143 @@
+:root {
+  --bg-color: #0a0a0a;
+  --text-color: #00ff00;
+  --link-color: #00ff66;
+  --prompt-color: #00ff00;
+  --header-color: #00ff33;
+  --code-bg: #1a1a1a;
+}
 
 body {
-  margin: 0;
-  background-color: #0d0d0d;
-  color: #00ff90;
-  font-family: 'Fira Code', monospace;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Courier New', monospace;
   line-height: 1.6;
-}
-header {
-  padding: 1rem;
-  border-bottom: 1px solid #1f1f1f;
-  background-color: #0d0d0d;
-}
-h1 {
   margin: 0;
-  font-size: 1.5rem;
+  padding: 20px;
 }
-.prompt {
-  color: #ff0055;
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
 }
+
+header {
+  border-bottom: 1px solid var(--text-color);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
 nav {
-  margin-top: 0.5rem;
+  margin: 1rem 0;
 }
+
 nav a {
-  color: #00ff90;
-  text-decoration: none;
   margin-right: 1rem;
+  text-decoration: none;
+  color: var(--link-color);
 }
+
 nav a:hover {
-  color: #ff0055;
+  text-decoration: underline;
 }
-main {
-  padding: 2rem;
+
+h1, h2, h3 {
+  color: var(--header-color);
 }
-article h2, article h3 {
-  color: #00ff90;
-  margin-top: 2rem;
-  border-bottom: 1px solid #1f1f1f;
-  padding-bottom: 0.3rem;
+
+.prompt {
+  color: var(--prompt-color);
+  margin-right: 0.5rem;
 }
-article time {
-  color: #8c8c8c;
-  font-size: 0.9rem;
-}
-footer {
+
+article {
+  margin-bottom: 2rem;
   padding: 1rem;
-  border-top: 1px solid #1f1f1f;
-  font-size: 0.9rem;
-  color: #8c8c8c;
-  background-color: #0d0d0d;
-}
-code {
-  background: #1f1f1f;
-  padding: 0.2rem 0.4rem;
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid rgba(0, 255, 0, 0.1);
   border-radius: 4px;
 }
-ul {
-  list-style-type: none;
-  padding-left: 0;
+
+article time {
+  color: rgba(0, 255, 0, 0.7);
+  font-size: 0.9rem;
 }
-ul li {
-  margin: 0.3rem 0;
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  background: var(--code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+}
+
+/* Terminal effect */
+.terminal-effect {
+  position: relative;
+}
+
+.terminal-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    rgba(0, 255, 0, 0.03) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Blinking cursor effect */
+.cursor::after {
+  content: '█';
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Dark mode optimization */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0a0a0a;
+    --text-color: #00ff00;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  
+  nav a {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 }

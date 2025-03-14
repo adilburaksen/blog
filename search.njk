@@ -1,0 +1,98 @@
+---
+layout: layout.njk
+title: Search
+---
+
+<div class="terminal-container">
+  <div class="terminal-header">
+    <span class="prompt">$</span> find / -name "*.md" | grep -i
+  </div>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Type to search..." class="terminal-input">
+  </div>
+  <div id="searchResults" class="search-results">
+    <!-- Results will be populated here -->
+  </div>
+</div>
+
+<script>
+const posts = [
+  {% for post in collections.posts %}
+    {
+      title: "{{ post.data.title | safe }}",
+      url: "{{ post.url | safe }}",
+      description: "{{ post.data.description | safe }}",
+      content: "{{ post.templateContent | striptags | safe }}",
+      date: "{{ post.date | dateDisplay }}"
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}
+];
+
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  if (query.length < 2) {
+    searchResults.innerHTML = '';
+    return;
+  }
+
+  const results = posts.filter(post => 
+    post.title.toLowerCase().includes(query) ||
+    post.description.toLowerCase().includes(query) ||
+    post.content.toLowerCase().includes(query)
+  );
+
+  searchResults.innerHTML = results.map(post => `
+    <article class="search-result">
+      <h3><span class="prompt">$</span> <a href="${post.url}">${post.title}</a></h3>
+      <time>${post.date}</time>
+      <p>${post.description}</p>
+    </article>
+  `).join('');
+});
+</script>
+
+<style>
+.terminal-container {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.terminal-header {
+  color: #00ff00;
+  margin-bottom: 15px;
+  font-family: monospace;
+}
+
+.terminal-input {
+  width: 100%;
+  padding: 10px;
+  background: #2a2a2a;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.terminal-input:focus {
+  outline: none;
+  border-color: #00ff66;
+}
+
+.search-results {
+  margin-top: 20px;
+}
+
+.search-result {
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+}
+
+.search-result:last-child {
+  border-bottom: none;
+}
+</style> 
