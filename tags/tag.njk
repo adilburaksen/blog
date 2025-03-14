@@ -8,7 +8,7 @@ permalink: "/tags/{{ tag | slug }}/index.html"
 <p>Posts tagged with <code>#{{ tag }}</code>:</p>
 
 {% for post in collections.posts %}
-  {% if post.data.tags contains tag %}
+  {% if tag in post.data.tags %}
     <article>
       <h3><a href="{{ post.url }}"><span class="prompt">$</span> {{ post.data.title }}</a></h3>
       <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | dateDisplay }}</time>
