@@ -141,3 +141,47 @@ pre code {
     margin-bottom: 0.5rem;
   }
 }
+
+.social-links {
+  margin: 20px 0;
+  padding: 15px 0;
+  border-top: 1px solid rgba(0, 255, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+}
+
+.social-output {
+  margin-left: 20px;
+}
+
+.social-output p {
+  margin: 10px 0;
+  font-family: monospace;
+}
+
+.social-output .file-info {
+  color: rgba(0, 255, 0, 0.7);
+  margin-right: 15px;
+  font-size: 0.9em;
+}
+
+.social-output a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.social-output a:hover {
+  color: #00ff33;
+  text-decoration: underline;
+}
+
+.social-output i {
+  margin-right: 5px;
+  font-size: 1.1em;
+}
+
+/* Hover effect for social links */
+.social-output a:hover i {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
