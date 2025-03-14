@@ -30,6 +30,10 @@ module.exports = function (eleventyConfig) {
     return DateTime.fromJSDate(date).toFormat('dd LLL yyyy');
   });
 
+  eleventyConfig.addFilter("limit", function (array, limit) {
+    return array.slice(0, limit);
+  });
+
   eleventyConfig.addWatchTarget("./css/");
 
   return {
