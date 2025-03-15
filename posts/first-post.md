@@ -1,7 +1,8 @@
 ---
+layout: post.njk
 title: "First Blood: Setting up the Lab"
 description: "Initial steps I took to prepare for my OSCP journey. VM setup, network isolation, and tooling."
-date: 2025-03-15
+date: 2024-03-15
 tags: ["oscp", "lab", "setup"]
 ---
 
