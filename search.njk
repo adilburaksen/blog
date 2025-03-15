@@ -56,31 +56,37 @@ searchInput.addEventListener('input', (e) => {
 
 <style>
 .terminal-container {
-  background: #1a1a1a;
+  background: rgba(0, 255, 0, 0.05);
   padding: 20px;
   border-radius: 5px;
   margin-top: 20px;
 }
 
 .terminal-header {
-  color: #00ff00;
+  color: var(--text-color);
   margin-bottom: 15px;
-  font-family: monospace;
+  font-family: 'Fira Code', monospace;
 }
 
 .terminal-input {
   width: 100%;
   padding: 10px;
-  background: #2a2a2a;
-  border: 1px solid #00ff00;
-  color: #00ff00;
-  font-family: monospace;
+  background: var(--bg-color);
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  font-family: 'Fira Code', monospace;
   font-size: 16px;
+  border-radius: 3px;
 }
 
 .terminal-input:focus {
   outline: none;
-  border-color: #00ff66;
+  border-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+.terminal-input::placeholder {
+  color: rgba(0, 255, 0, 0.5);
 }
 
 .search-results {
@@ -88,11 +94,45 @@ searchInput.addEventListener('input', (e) => {
 }
 
 .search-result {
-  border-bottom: 1px solid #333;
-  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+  padding: 15px 0;
 }
 
 .search-result:last-child {
   border-bottom: none;
+}
+
+.search-result h3 {
+  margin: 0 0 10px 0;
+}
+
+.search-result h3 a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.search-result h3 a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.search-result time {
+  color: rgba(0, 255, 0, 0.7);
+  font-size: 0.9em;
+  font-family: 'Fira Code', monospace;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.search-result p {
+  color: var(--text-color);
+  margin: 5px 0 0 0;
+  font-size: 0.95em;
+}
+
+.prompt {
+  color: var(--text-color);
+  margin-right: 5px;
 }
 </style> 
