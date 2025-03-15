@@ -13,6 +13,148 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+  <style>
+    /* Base styles */
+    :root {
+      --text-color: #00ff33;
+      --link-color: #00ff33;
+      --bg-color: #000000;
+      --header-bg: rgba(0, 255, 0, 0.05);
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Fira Code', monospace;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header styles */
+    header {
+      background: var(--header-bg);
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    nav {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    nav::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    nav .prompt {
+      white-space: nowrap;
+      margin-right: 10px;
+    }
+
+    nav a {
+      color: var(--link-color);
+      text-decoration: none;
+      margin-right: 15px;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* Footer styles */
+    footer {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 255, 0, 0.1);
+    }
+
+    .social-links {
+      margin-bottom: 30px;
+    }
+
+    .social-output {
+      margin-left: 20px;
+    }
+
+    .social-output a {
+      color: var(--link-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .social-output a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .cursor {
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      header {
+        padding: 15px;
+      }
+
+      header h1 {
+        font-size: 1.2em;
+      }
+
+      nav {
+        margin-top: 10px;
+        font-size: 0.9em;
+      }
+
+      nav a {
+        margin-right: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1em;
+      }
+
+      nav {
+        font-size: 0.85em;
+      }
+
+      nav a {
+        margin-right: 10px;
+      }
+    }
+  </style>
 </head>
 <body class="terminal-effect">
   <div class="container">
