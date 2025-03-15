@@ -4,8 +4,6 @@ A minimalist, terminal-themed blog built with 11ty (Eleventy) static site genera
 
 Live demo: [hackwith.me](https://hackwith.me)
 
-![Terminal Blog Preview](preview.png)
-
 ## Features
 
 - 🖥️ Terminal-like interface
