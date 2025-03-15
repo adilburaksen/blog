@@ -3,17 +3,99 @@ layout: layout.njk
 title: Search
 ---
 
-<div class="terminal-container">
-  <div class="terminal-header">
-    <span class="prompt">$</span> find / -name "*.md" | grep -i
+<div class="search-container">
+  <div class="terminal-output">
+    <p>$ find / -name "*.md" | grep -i</p>
+    <div class="search-input-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Type to search ..." autocomplete="off">
+    </div>
   </div>
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Type to search..." class="terminal-input">
-  </div>
-  <div id="searchResults" class="search-results">
-    <!-- Results will be populated here -->
-  </div>
+  <div id="searchResults" class="search-results"></div>
 </div>
+
+<style>
+  .search-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 400px);
+  }
+
+  .terminal-output {
+    background: var(--header-bg);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .search-input-container {
+    margin-top: 10px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    font-family: 'Fira Code', monospace;
+    font-size: 1em;
+    outline: none;
+    border-radius: 3px;
+  }
+
+  .search-input::placeholder {
+    color: rgba(var(--text-color-rgb), 0.5);
+  }
+
+  .search-results {
+    flex: 1;
+  }
+
+  .search-result {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--header-bg);
+    border-radius: 5px;
+    transition: all 0.2s ease;
+  }
+
+  .search-result:hover {
+    background: rgba(var(--text-color-rgb), 0.1);
+  }
+
+  .search-result h3 {
+    margin: 0 0 10px 0;
+  }
+
+  .search-result p {
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  .search-result a {
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  .search-result a:hover {
+    color: var(--hover-color);
+  }
+
+  @media (max-width: 768px) {
+    .search-container {
+      min-height: calc(100vh - 300px);
+    }
+
+    .terminal-output {
+      padding: 15px;
+    }
+
+    .search-input {
+      font-size: 0.9em;
+    }
+  }
+</style>
 
 <script>
 const posts = [
@@ -52,87 +134,4 @@ searchInput.addEventListener('input', (e) => {
     </article>
   `).join('');
 });
-</script>
-
-<style>
-.terminal-container {
-  background: rgba(0, 255, 0, 0.05);
-  padding: 20px;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.terminal-header {
-  color: var(--text-color);
-  margin-bottom: 15px;
-  font-family: 'Fira Code', monospace;
-}
-
-.terminal-input {
-  width: 100%;
-  padding: 10px;
-  background: var(--bg-color);
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
-  font-family: 'Fira Code', monospace;
-  font-size: 16px;
-  border-radius: 3px;
-}
-
-.terminal-input:focus {
-  outline: none;
-  border-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
-}
-
-.terminal-input::placeholder {
-  color: rgba(0, 255, 0, 0.5);
-}
-
-.search-results {
-  margin-top: 20px;
-}
-
-.search-result {
-  border-bottom: 1px solid rgba(0, 255, 0, 0.1);
-  padding: 15px 0;
-}
-
-.search-result:last-child {
-  border-bottom: none;
-}
-
-.search-result h3 {
-  margin: 0 0 10px 0;
-}
-
-.search-result h3 a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.search-result h3 a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.search-result time {
-  color: rgba(0, 255, 0, 0.7);
-  font-size: 0.9em;
-  font-family: 'Fira Code', monospace;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.search-result p {
-  color: var(--text-color);
-  margin: 5px 0 0 0;
-  font-size: 0.95em;
-}
-
-.prompt {
-  color: var(--text-color);
-  margin-right: 5px;
-}
-</style> 
+</script> 
