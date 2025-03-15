@@ -14,7 +14,7 @@
       <article class="post-item">
         <div class="post-header">
           <span class="file-info">
-            -rw-r--r-- 1 root root {{ post.date | date('DD-MM-YYYY') }}
+            -rw-r--r-- 1 root root {{ post.date | dateDisplay }}
           </span>
           <h3>
             <a href="{{ post.url }}">
