@@ -1,6 +1,6 @@
 <!-- layout.njk with syntax highlighting -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="matrix">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,14 +14,92 @@
   <script>hljs.highlightAll();</script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
   <style>
-    /* Base styles */
-    :root {
+    /* Theme variables */
+    html[data-theme="matrix"] {
       --text-color: #00ff33;
       --link-color: #00ff33;
       --bg-color: #000000;
-      --header-bg: rgba(0, 255, 0, 0.05);
+      --header-bg: rgba(0, 255, 51, 0.05);
+      --hover-color: #fff;
     }
 
+    html[data-theme="cyber"] {
+      --text-color: #0ff;
+      --link-color: #0ff;
+      --bg-color: #000000;
+      --header-bg: rgba(0, 255, 255, 0.05);
+      --hover-color: #fff;
+    }
+
+    html[data-theme="amber"] {
+      --text-color: #ffb000;
+      --link-color: #ffb000;
+      --bg-color: #000000;
+      --header-bg: rgba(255, 176, 0, 0.05);
+      --hover-color: #fff;
+    }
+
+    html[data-theme="neon"] {
+      --text-color: #ff00ff;
+      --link-color: #ff00ff;
+      --bg-color: #000000;
+      --header-bg: rgba(255, 0, 255, 0.05);
+      --hover-color: #fff;
+    }
+
+    /* Theme switcher styles */
+    .theme-switcher {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--header-bg);
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--text-color);
+      z-index: 1000;
+      font-family: 'Fira Code', monospace;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .theme-switcher p {
+      margin: 0 0 5px 0;
+      color: var(--text-color);
+    }
+
+    .theme-option {
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .theme-option:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-option.active {
+      background: var(--text-color);
+      color: var(--bg-color);
+    }
+
+    .color-preview {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .color-preview.matrix { background: #00ff33; }
+    .color-preview.cyber { background: #0ff; }
+    .color-preview.amber { background: #ffb000; }
+    .color-preview.neon { background: #ff00ff; }
+
+    /* Base styles */
     html, body {
       height: 100%;
       margin: 0;
@@ -87,7 +165,7 @@
     }
 
     nav a:hover {
-      color: #fff;
+      color: var(--hover-color);
       text-decoration: underline;
     }
 
@@ -95,7 +173,7 @@
     footer {
       margin-top: 50px;
       padding-top: 30px;
-      border-top: 1px solid rgba(0, 255, 0, 0.1);
+      border-top: 1px solid var(--header-bg);
     }
 
     .social-links {
@@ -113,7 +191,7 @@
     }
 
     .social-output a:hover {
-      color: #fff;
+      color: var(--hover-color);
       text-decoration: underline;
     }
 
@@ -146,6 +224,12 @@
 
       nav a {
         margin-right: 12px;
+      }
+
+      .theme-switcher {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.9em;
       }
     }
 
@@ -215,6 +299,26 @@
         <span class="prompt">blog$</span> _
       </p>
     </footer>
+
+    <div class="theme-switcher">
+      <p><span class="prompt">$</span> select-theme</p>
+      <div class="theme-option active" data-theme="matrix">
+        <span class="color-preview matrix"></span>
+        Matrix
+      </div>
+      <div class="theme-option" data-theme="cyber">
+        <span class="color-preview cyber"></span>
+        Cyber
+      </div>
+      <div class="theme-option" data-theme="amber">
+        <span class="color-preview amber"></span>
+        Amber
+      </div>
+      <div class="theme-option" data-theme="neon">
+        <span class="color-preview neon"></span>
+        Neon
+      </div>
+    </div>
   </div>
 
   <script>
@@ -224,6 +328,36 @@
         const text = header.textContent;
         header.innerHTML = `<span class="prompt">$</span> ${text}`;
       }
+    });
+
+    // Theme switcher functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeOptions = document.querySelectorAll('.theme-option');
+      const savedTheme = localStorage.getItem('theme') || 'matrix';
+      
+      // Set initial theme
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      themeOptions.forEach(option => {
+        if (option.dataset.theme === savedTheme) {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+
+      // Theme switching
+      themeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          const theme = option.dataset.theme;
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+          
+          themeOptions.forEach(opt => {
+            opt.classList.remove('active');
+          });
+          option.classList.add('active');
+        });
+      });
     });
   </script>
 </body>
