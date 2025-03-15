@@ -27,12 +27,21 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("dateDisplay", function (date) {
-    return DateTime.fromJSDate(date).toFormat('dd LLL yyyy');
+    return new Date(date).toLocaleDateString('en-US', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric'
+    });
   });
 
   eleventyConfig.addFilter("limit", function (array, limit) {
     return array.slice(0, limit);
   });
+
+  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
+  eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("favicon.png");
 
   eleventyConfig.addWatchTarget("./css/");
 
