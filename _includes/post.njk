@@ -1,119 +1,135 @@
----
-layout: layout.njk
----
+{% extends "layout.njk" %}
 
-<article class="post terminal-post">
-  <header class="post-header">
-    <p class="command-line">
+{% block content %}
+<div class="post">
+  <div class="post-header">
+    <p class="command">
       <span class="prompt">blog$</span> cat {{ page.fileSlug }}.md
     </p>
-    <h1>{{ title }}</h1>
-    <div class="post-meta">
-      <time datetime="{{ page.date | date('yyyy-MM-dd') }}">
-        <span class="prompt">$</span> date
-        {{ page.date | dateDisplay }}
-      </time>
-      {% if tags %}
-      <div class="tags">
-        <span class="prompt">$</span> grep -l "tags"
+    <h1>
+      <span class="prompt">$</span> {{ title }}
+    </h1>
+    <p class="file-info">
+      <span class="prompt">$</span> date {{ page.date | dateDisplay }}
+    </p>
+    {% if tags %}
+      <p class="tags">
+        <span class="prompt">$</span> grep -l "tags:"
         {% for tag in tags %}
           <a href="/tags/{{ tag | slug }}/">#{{ tag }}</a>
         {% endfor %}
-      </div>
-      {% endif %}
-    </div>
-  </header>
+      </p>
+    {% endif %}
+  </div>
 
   <div class="post-content">
     {{ content | safe }}
   </div>
 
-  <footer class="post-footer">
-    <div class="share">
-      <p class="command-line">
-        <span class="prompt">$</span> share {{ page.fileSlug }}
-      </p>
-      <a href="https://twitter.com/intent/tweet?text={{ title | urlencode }}&url={{ page.url | urlencode }}" target="_blank" rel="noopener">Twitter</a>
-      <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | urlencode }}&title={{ title | urlencode }}" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </footer>
-</article>
-
-<nav class="post-nav">
-  {% if collections.posts %}
-    {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
-    {% set nextPost = collections.posts | getNextCollectionItem(page) %}
-
-    <div class="nav-links">
-      {% if previousPost %}
-        <a href="{{ previousPost.url }}" class="prev">
-          <span class="prompt">$</span> cd ../{{ previousPost.fileSlug }}
-        </a>
-      {% endif %}
-
-      {% if nextPost %}
-        <a href="{{ nextPost.url }}" class="next">
-          <span class="prompt">$</span> cd ../{{ nextPost.fileSlug }}
-        </a>
-      {% endif %}
-    </div>
-  {% endif %}
-</nav>
+  <div class="post-footer">
+    <p class="share">
+      <span class="prompt">$</span> share {{ page.fileSlug }}
+      <a href="https://twitter.com/intent/tweet?text={{ title | urlencode }}&url={{ page.url | urlencode }}" target="_blank">Twitter</a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | urlencode }}&title={{ title | urlencode }}" target="_blank">LinkedIn</a>
+    </p>
+    <p class="navigation">
+      <span class="prompt">$</span> cd ../hello-world
+    </p>
+  </div>
+</div>
 
 <style>
-.terminal-post {
+.post {
   background: rgba(0, 255, 0, 0.05);
   padding: 20px;
   border-radius: 5px;
   margin: 20px 0;
 }
 
-.command-line {
-  color: var(--text-color);
+.post-header {
+  margin-bottom: 30px;
+}
+
+.command {
   font-family: monospace;
+  color: rgba(0, 255, 0, 0.7);
   margin-bottom: 10px;
 }
 
-.post-meta {
-  margin: 15px 0;
+.file-info {
+  font-family: monospace;
+  color: rgba(0, 255, 0, 0.7);
   font-size: 0.9em;
+  margin: 10px 0;
+}
+
+.tags {
+  font-family: monospace;
+  font-size: 0.9em;
+  margin: 10px 0;
 }
 
 .tags a {
-  margin-right: 10px;
   color: var(--link-color);
+  text-decoration: none;
+  margin-right: 10px;
+  transition: color 0.2s ease;
+}
+
+.tags a:hover {
+  color: #00ff33;
+  text-decoration: underline;
 }
 
 .post-content {
   margin: 20px 0;
+  line-height: 1.6;
 }
 
-.post-nav {
-  margin-top: 40px;
+.post-content pre {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.post-content code {
+  font-family: monospace;
+}
+
+.post-content blockquote {
+  border-left: 3px solid rgba(0, 255, 0, 0.3);
+  margin: 20px 0;
+  padding-left: 20px;
+  color: rgba(0, 255, 0, 0.7);
+}
+
+.post-footer {
+  margin-top: 30px;
   padding-top: 20px;
-  border-top: 1px solid rgba(0, 255, 0, 0.2);
-}
-
-.nav-links {
-  display: flex;
-  justify-content: space-between;
-}
-
-.nav-links a {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
+  border-top: 1px solid rgba(0, 255, 0, 0.1);
 }
 
 .share {
-  margin-top: 30px;
+  font-family: monospace;
+  margin-bottom: 10px;
 }
 
 .share a {
-  margin-right: 15px;
   color: var(--link-color);
+  text-decoration: none;
+  margin-right: 10px;
+  transition: color 0.2s ease;
 }
-</style> 
+
+.share a:hover {
+  color: #00ff33;
+  text-decoration: underline;
+}
+
+.navigation {
+  font-family: monospace;
+  color: rgba(0, 255, 0, 0.7);
+}
+</style>
+{% endblock %} 
