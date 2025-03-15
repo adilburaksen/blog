@@ -5,7 +5,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("images");
 
   eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("./posts/*.md").sort((a, b) => b.date - a.date);
+    return collectionApi.getFilteredByGlob("./posts/*.md").sort((a, b) => {
+      return new Date(b.data.date) - new Date(a.data.date);
+    });
   });
 
   eleventyConfig.addCollection("tagList", function (collection) {
