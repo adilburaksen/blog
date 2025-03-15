@@ -3,20 +3,155 @@
   <h2><span class="prompt">$</span> blog</h2>
   <p>All posts in the hackwith.me archive.</p>
 
-  {% for post in collections.posts %}
-    <article>
-      <h3><a href="{{ post.url }}"><span class="prompt">$</span> {{ post.data.title }}</a></h3>
-      <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | dateDisplay }}</time>
-      <p>{{ post.data.description }}</p>
+  <div class="terminal-posts">
+    <div class="terminal-header">
+      <p><span class="prompt">blog$</span> ls -la /posts</p>
+      <p class="total-count">total {{ collections.posts | length }}</p>
+    </div>
 
-      {% if post.data.tags %}
-        <p>
-          Tags:
-          {% for tag in post.data.tags %}
-            <a href="/tags/{{ tag | slug }}/">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
-          {% endfor %}
-        </p>
-      {% endif %}
-    </article>
+    <div class="posts-list">
+      {% for post in collections.posts | reverse %}
+      <article class="post-item">
+        <div class="post-header">
+          <span class="file-info">
+            -rw-r--r-- 1 root root {{ post.date | date('DD-MM-YYYY') }}
+          </span>
+          <h3>
+            <a href="{{ post.url }}">
+              <span class="prompt">$</span> cat {{ post.fileSlug }}.md
+            </a>
+          </h3>
+        </div>
+        
+        <div class="post-preview">
+          <p class="description">{{ post.data.description }}</p>
+          {% if post.data.tags %}
+            <p class="tags">
+              <span class="prompt">$</span> grep -l "tags:"
+              {% for tag in post.data.tags %}
+                <a href="/tags/{{ tag | slug }}/">#{{ tag }}</a>
+              {% endfor %}
+            </p>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <style>
+  .terminal-posts {
+    background: rgba(0, 255, 0, 0.05);
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+  }
+
+  .terminal-header {
+    margin-bottom: 20px;
+    font-family: monospace;
+  }
+
+  .terminal-header .total-count {
+    color: rgba(0, 255, 0, 0.7);
+    margin-left: 20px;
+    font-size: 0.9em;
+  }
+
+  .post-item {
+    border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+    padding: 15px 0;
+    transition: background-color 0.2s ease;
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-item:hover {
+    background: rgba(0, 255, 0, 0.02);
+  }
+
+  .post-header {
+    margin-bottom: 10px;
+  }
+
+  .file-info {
+    color: rgba(0, 255, 0, 0.7);
+    font-size: 0.9em;
+    font-family: monospace;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .post-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+
+  .post-header a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .post-header a:hover {
+    color: #00ff33;
+    text-decoration: underline;
+  }
+
+  .post-preview {
+    margin-left: 20px;
+  }
+
+  .description {
+    color: var(--text-color);
+    margin: 10px 0;
+  }
+
+  .tags {
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+
+  .tags a {
+    color: var(--link-color);
+    text-decoration: none;
+    margin-right: 10px;
+    transition: color 0.2s ease;
+  }
+
+  .tags a:hover {
+    color: #00ff33;
+    text-decoration: underline;
+  }
+
+  /* Terminal typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  .post-item {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { 
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  {% for i in range(0, collections.posts.length) %}
+  .post-item:nth-child({{ i + 1 }}) {
+    animation-delay: {{ i * 0.1 }}s;
+  }
   {% endfor %}
+  </style>
 {% endblock %}
