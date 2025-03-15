@@ -187,22 +187,29 @@
     }
 
     .social-links {
-      margin-bottom: 30px;
+      margin-top: 20px;
+      font-size: 0.9em;
     }
 
-    .social-output {
-      margin-left: 20px;
-    }
-
-    .social-output a {
-      color: var(--link-color);
+    .social-links a {
+      color: var(--text-color);
       text-decoration: none;
+      margin-right: 15px;
       transition: color 0.2s ease;
     }
 
-    .social-output a:hover {
+    .social-links a:hover {
       color: var(--hover-color);
-      text-decoration: underline;
+    }
+
+    .social-links i {
+      margin-right: 5px;
+    }
+
+    .social-links .x-icon {
+      font-family: Arial, sans-serif;
+      font-style: normal;
+      font-weight: bold;
     }
 
     .cursor {
@@ -312,28 +319,26 @@
 
     <footer>
       <div class="social-links">
-        <p>
-          <span class="prompt">blog$</span> cat /etc/social/*
-        </p>
-        <div class="social-output">
-          <p>
-            <span class="file-info">-rw-r--r-- root root 19 Mar 15 00:00</span>
-            <a href="https://linkedin.com/in/adilburaksen" target="_blank" rel="noopener">
+        <p>$ cat /etc/social/*</p>
+        <div class="file-list">
+          <div class="file-item">
+            <span class="file-info">-rw-r--r-- root root 15 Mar 15 00:00</span>
+            <a href="https://linkedin.com/in/adilburaksen" target="_blank" rel="noopener noreferrer">
               <i class="fab fa-linkedin"></i> ~/linkedin/adilburaksen
             </a>
-          </p>
-          <p>
+          </div>
+          <div class="file-item">
             <span class="file-info">-rw-r--r-- root root 16 Mar 15 00:00</span>
-            <a href="https://github.com/adilburaksen" target="_blank" rel="noopener">
+            <a href="https://github.com/adilburaksen" target="_blank" rel="noopener noreferrer">
               <i class="fab fa-github"></i> ~/github/adilburaksen
             </a>
-          </p>
-          <p>
+          </div>
+          <div class="file-item">
             <span class="file-info">-rw-r--r-- root root 14 Mar 15 00:00</span>
-            <a href="https://x.com/adilburaksen" target="_blank" rel="noopener">
-              <i class="fab fa-x-twitter"></i> ~/x/adilburaksen
+            <a href="https://x.com/adilburaksen" target="_blank" rel="noopener noreferrer">
+              <span class="x-icon">𝕏</span> ~/x/adilburaksen
             </a>
-          </p>
+          </div>
         </div>
       </div>
       <p>
