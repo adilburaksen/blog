@@ -22,7 +22,7 @@
     {% endif %}
   </div>
 
-  <div class="post-content">
+  <div class="post-content terminal-content">
     {{ content | safe }}
   </div>
 
@@ -89,6 +89,23 @@
   color: var(--text-color);
 }
 
+.terminal-content p {
+  margin: 15px 0;
+  color: var(--text-color);
+}
+
+.terminal-content a {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--link-color);
+  transition: all 0.2s ease;
+}
+
+.terminal-content a:hover {
+  color: #00ff33;
+  border-bottom: 1px solid #00ff33;
+}
+
 .post-content img {
   max-width: 100%;
   height: auto;
@@ -97,6 +114,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
 }
 
 .post-content pre {
@@ -145,4 +164,4 @@
   color: rgba(0, 255, 0, 0.7);
 }
 </style>
-{% endblock %} 
+{% endblock %}
