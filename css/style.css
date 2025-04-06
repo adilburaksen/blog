@@ -121,6 +121,12 @@ img {
 .post-content {
   margin: 20px 0;
   line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
 }
 
 .post-content p {
