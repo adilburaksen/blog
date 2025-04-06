@@ -36,6 +36,14 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addFilter("dateIso", function(date) {
+    return new Date(date).toISOString();
+  });
+
+  eleventyConfig.addFilter("absoluteUrl", function(url, base) {
+    return (base || "") + url;
+  });
+
   eleventyConfig.addFilter("limit", function (array, limit) {
     return array.slice(0, limit);
   });
