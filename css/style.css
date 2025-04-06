@@ -100,6 +100,14 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+/* Özellikle GIF'ler için ek stil */
+img[src*="giphy.gif"] {
+  max-width: 80%;
+  margin: 30px auto;
 }
 
 /* Terminal effect */
