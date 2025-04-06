@@ -156,13 +156,31 @@ img {
   border-radius: 4px;
 }
 
+/* Terminal GIF styles */
+.gif-container {
+  margin: 30px auto;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  max-width: 90%;
+}
+
+.terminal-gif {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
 /* Specific styles for Giphy GIFs */
 img[src*="giphy.com"] {
-  max-width: 80%;
-  margin: 25px auto;
+  max-width: 100%;
+  margin: 0 auto;
   display: block;
-  border: 2px solid rgba(0, 255, 0, 0.3);
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
 }
 
 /* Terminal effect */
