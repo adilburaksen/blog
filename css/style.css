@@ -104,10 +104,60 @@ img {
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
 }
 
-/* Özellikle GIF'ler için ek stil */
-img[src*="giphy.gif"] {
+/* Blog post styles */
+.post {
+  background: rgba(0, 20, 0, 0.2);
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+  border: 1px solid rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.05);
+}
+
+.post-header {
+  margin-bottom: 30px;
+}
+
+.post-content {
+  margin: 20px 0;
+  line-height: 1.6;
+}
+
+.post-content p {
+  margin: 15px 0;
+  color: var(--text-color);
+}
+
+.post-content a {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--link-color);
+  transition: all 0.2s ease;
+}
+
+.post-content a:hover {
+  color: #00ff33;
+  border-bottom: 1px solid #00ff33;
+}
+
+.post-content img {
+  max-width: 90%;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* Specific styles for Giphy GIFs */
+img[src*="giphy.gif"], 
+img[src*="media.giphy.com"] {
   max-width: 80%;
-  margin: 30px auto;
+  margin: 25px auto;
+  display: block;
+  border: 2px solid rgba(0, 255, 0, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
 }
 
 /* Terminal effect */
