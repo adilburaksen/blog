@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} - {% endif %}hackwith.me</title>
+  <meta name="description" content="{% if description %}{{ description }}{% else %}A hacker's blog about security, programming, and technology{% endif %}">
+  <link rel="stylesheet" href="/css/modern.css">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="site-title">
+        <a href="/">hackwith.me</a>
+      </div>
+      <nav class="site-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-content">
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; {{ page.date.getFullYear() }} hackwith.me. Built with <a href="https://www.11ty.dev/">Eleventy</a>.</p>
+      <p class="social-links">
+        <a href="https://github.com/adilburaksen" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://twitter.com/adilburaksen" target="_blank" rel="noopener noreferrer">Twitter</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

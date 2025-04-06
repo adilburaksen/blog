@@ -1,0 +1,35 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="home">
+  <h1 class="page-heading">Latest Posts</h1>
+  
+  <ul class="posts-list">
+    {%- for post in collections.posts | reverse -%}
+      <li class="post-item">
+        <h2 class="post-item-title">
+          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+        </h2>
+        <div class="post-item-meta">
+          <time datetime="{{ post.date | dateIso }}">{{ post.date | dateDisplay }}</time>
+          {% if post.data.tags %}
+            <div class="post-tags">
+              {% for tag in post.data.tags %}
+                {% if tag != "posts" %}
+                  <a href="/tags/{{ tag | slug }}/" class="tag">#{{ tag }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        {% if post.data.description %}
+          <div class="post-item-excerpt">
+            <p>{{ post.data.description }}</p>
+          </div>
+        {% endif %}
+        <a href="{{ post.url | url }}" class="read-more">Read more →</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+{% endblock %}
