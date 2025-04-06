@@ -151,8 +151,7 @@ img {
 }
 
 /* Specific styles for Giphy GIFs */
-img[src*="giphy.gif"], 
-img[src*="media.giphy.com"] {
+img[src*="giphy.com"] {
   max-width: 80%;
   margin: 25px auto;
   display: block;
