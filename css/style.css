@@ -43,6 +43,8 @@ nav a:hover {
 
 h1, h2, h3 {
   color: var(--header-color);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
 }
 
 .prompt {
@@ -88,6 +90,16 @@ pre {
 
 pre code {
   padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Terminal effect */
@@ -139,6 +151,10 @@ pre code {
   nav a {
     display: block;
     margin-bottom: 0.5rem;
+  }
+  
+  .post-content img {
+    margin: 10px 0;
   }
 }
 

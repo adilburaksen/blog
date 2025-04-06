@@ -2,6 +2,7 @@
 title: How Long Has It Been?
 date: 2024-03-15
 tags: [reflection, personal, writing]
+description: A personal reflection on the journey of writing, time passing, and returning to old habits.
 ---
 
 Years ago… Many, many years ago… A young boy, driven by a passion for reading and writing, turned this curiosity into a journey of research—one that eventually became a habit intertwined with his daily life. This habit fueled his desire to gain new experiences and nurtured an inner urge to share them with others.
